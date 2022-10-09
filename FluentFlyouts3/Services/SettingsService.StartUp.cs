@@ -9,7 +9,7 @@ namespace FluentFlyouts3.Services
 {
     public partial class SettingsService
     {
-        private bool isStartupEnabled = GetStartupAsync().Result;
+       /* private bool isStartupEnabled = GetStartupAsync().Result;
         public bool IsStartupEnabled
         {
             get => isStartupEnabled;
@@ -28,6 +28,6 @@ namespace FluentFlyouts3.Services
           //  if(!startupTask.Equals(StartupTaskState.Enabled) || startupTask.State != StartupTaskState.EnabledByPolicy)
            //     await startupTask.RequestEnableAsync();
             return await GetStartupAsync();
-        }
+        }*/
     }
 }

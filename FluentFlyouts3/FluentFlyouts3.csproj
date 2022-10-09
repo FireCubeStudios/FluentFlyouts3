@@ -17,10 +17,17 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundle>Never</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <AppxPackageDir>C:\Users\ayush\source\repos\FluentFlyouts3\FluentFlyouts3\AppPackages\</AppxPackageDir>
+    <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="AppPackages\**" />
+    <EmbeddedResource Remove="AppPackages\**" />
+    <None Remove="AppPackages\**" />
+    <Page Remove="AppPackages\**" />
+  </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\BatteryFlyoutControl.xaml" />
     <None Remove="Flyouts\BatteryFlyout.xaml" />
@@ -41,7 +48,7 @@
     <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.50" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.4" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25206-preview" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
     <PackageReference Include="WinUIEx" Version="1.8.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
@@ -70,5 +77,8 @@
     <Page Update="SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Remove="AppPackages\**" />
   </ItemGroup>
 </Project>
