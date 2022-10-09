@@ -122,7 +122,7 @@
                     <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
                     <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join Fluent Flyouts Discord</HyperlinkButton>
-                    <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/RunAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">GitHub repository</HyperlinkButton>
+                    <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/FluentFlyouts3">GitHub repository</HyperlinkButton>
                     <Button Click="Exit_Click" Margin="4,12,4,8" Width="150">Exit</Button>
                 </StackPanel>
             </Grid>

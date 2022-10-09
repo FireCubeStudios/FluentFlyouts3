@@ -13,6 +13,13 @@
     <UseWPF>False</UseWPF>
     <UseWindowsForms>False</UseWindowsForms>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <AppxPackageDir>C:\Users\ayush\source\repos\FluentFlyouts3\FluentFlyouts3\AppPackages\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Controls\BatteryFlyoutControl.xaml" />
