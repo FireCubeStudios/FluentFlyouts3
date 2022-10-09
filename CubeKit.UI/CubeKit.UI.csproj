@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>CubeKit.UI</RootNamespace>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Controls\Toolkit\**" />
+    <Content Remove="Controls\Toolkit\**" />
+    <EmbeddedResource Remove="Controls\Toolkit\**" />
+    <None Remove="Controls\Toolkit\**" />
+    <Page Remove="Controls\Toolkit\**" />
+    <PRIResource Remove="Controls\Toolkit\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controls\Settings\SettingsBlockControl.xaml" />
+    <None Remove="Controls\Settings\SettingsDisplayControl.xaml" />
+    <None Remove="Styles\CubeThemeDictionary.xaml" />
+    <None Remove="Styles\CubeUI.xaml" />
+    <None Remove="Styles\GlowGradientUI.xaml" />
+    <None Remove="Themes\Generic.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+      <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
+      <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.4" />
+      <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\Settings\SettingsDisplayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\Settings\SettingsBlockControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\CubeUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\CubeThemeDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\GlowGradientUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

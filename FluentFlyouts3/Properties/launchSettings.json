@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FluentFlyouts3 (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FluentFlyouts3 (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CubeKit.UI.Icons">
+
+    <Style TargetType="local:FluentSymbolIcon">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:FluentSymbolIcon">
+                    <PathIcon x:Name="IconDisplay"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              Foreground="{TemplateBinding Foreground}"
+                              Width="{TemplateBinding Width}"
+                              Height="{TemplateBinding Height}"
+                              MaxWidth="{TemplateBinding MaxWidth}"
+                              MaxHeight="{TemplateBinding MaxHeight}"
+                              MinWidth="{TemplateBinding MinWidth}"
+                              MinHeight="{TemplateBinding MinHeight}"
+                              Margin="{TemplateBinding Margin}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
