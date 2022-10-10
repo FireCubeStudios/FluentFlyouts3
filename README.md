@@ -10,7 +10,7 @@
     <li>Charge Rate</li>
     <li>Battery Health (Wh)</li>
 </ul>
-Available for download in the <a href="https://apps.microsoft.com/store/detail/fluent-flyouts-battery-preview/9NWXR2MKSNX7">Miscosoft Store</a><br><br>
+Available for download in the <a href="https://apps.microsoft.com/store/detail/fluent-flyouts-battery-preview/9NWXR2MKSNX7">Microsoft Store</a><br><br>
 
 
 <div align="center">
