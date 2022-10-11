@@ -26,7 +26,7 @@
                     <Image x:Name="AppFontIcon"
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center"
-                    Source="Assets/Square44x44Logo.scale-100.png"   
+                    Source="Images/Square44x44Logo.scale-100.png"   
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
@@ -117,7 +117,7 @@
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 8">About this app</TextBlock>
                     <StackPanel Margin="4, 0, 4, 0" Orientation="Horizontal">
                         <TextBlock FontSize="14" Margin="0, 4, 4, 0">Fluent Flyouts™️</TextBlock>
-                        <TextBlock Opacity="0.7" FontSize="14" Margin="2, 4, 4, 0"> - Preview 3.0</TextBlock>
+                        <TextBlock Opacity="0.7" FontSize="14" Margin="2, 4, 4, 0"> - Preview 3.1</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
                     <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>

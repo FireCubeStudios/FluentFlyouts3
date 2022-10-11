@@ -18,8 +18,8 @@ namespace CubeKit.Flyouts.Helpers
             double W = Flyout.Width;
             double H = Flyout.Height;
 
-            //  Flyout.MoveAndResize((DisplayWidth / 1.17 ) - (W / 2), (DisplayHeight / 1.17) - (H / 2), W, H);
-            Flyout.MoveAndResize(DisplayWidth - W , DisplayHeight - H , Flyout.Width, Flyout.Height);
+            Flyout.MoveAndResize((DisplayWidth / 1.17 ) - (W / 2), (DisplayHeight / 1.17) - (H / 2), W, H);
+        //    Flyout.MoveAndResize(DisplayWidth - W , DisplayHeight - H , Flyout.Width, Flyout.Height);
         }
 
         private double GetScale()
