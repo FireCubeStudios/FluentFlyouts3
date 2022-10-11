@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="FluentFlyouts3.Controls.BatteryFlyoutControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,41 +21,41 @@
                         <ScaleTransform ScaleX="2" ScaleY="2" />
                     </icons:FluentSymbolIcon.RenderTransform>
                 </icons:FluentSymbolIcon>
-                <TextBlock x:Name="Percentage" FontSize="24" FontWeight="SemiBold" Canvas.ZIndex="2" VerticalAlignment="Center" Margin="24,4, 0, 4"/>
-                <TextBlock x:Name="RemainingTime" FontSize="14" Opacity="0.7" VerticalAlignment="Center" Margin="8, 8, 8, 0"/>
-                <TextBlock x:Name="PowerUsageText" FontSize="14" Opacity="0.7" VerticalAlignment="Center" x:FieldModifier="Public" Margin="4, 8, 8, 0"/>
+                <TextBlock IsTabStop="false" x:Name="Percentage" FontSize="24" FontWeight="SemiBold" Canvas.ZIndex="2" VerticalAlignment="Center" Margin="24,4, 0, 4"/>
+                <TextBlock IsTabStop="false" x:Name="RemainingTime" FontSize="14" Opacity="0.7" VerticalAlignment="Center" Margin="8, 8, 8, 0"/>
+                <TextBlock IsTabStop="false" x:Name="PowerUsageText" FontSize="14" Opacity="0.7" VerticalAlignment="Center" x:FieldModifier="Public" Margin="4, 8, 8, 0"/>
             </StackPanel>
             <Grid x:Name="AdditionalInfo" Margin="12, 0, 12, 0" x:Load="{x:Bind Settings.IsAdditionalInformationEnabled, Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock FontWeight="SemiBold" Text="Remaining Capacity: "/>
-                    <TextBlock x:Name="RemaniningCapacity" Margin="4, 0, 0, 0"/>
+                    <TextBlock IsTabStop="false" FontWeight="SemiBold" Text="Remaining Capacity: "/>
+                    <TextBlock IsTabStop="false" x:Name="RemaniningCapacity" Margin="4, 0, 0, 0"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock x:Name="Status" FontWeight="SemiBold"/>
-                    <TextBlock x:Name="PowerRate" Margin="4, 0, 4, 0"/>
+                    <TextBlock IsTabStop="false" x:Name="Status" FontWeight="SemiBold"/>
+                    <TextBlock IsTabStop="false" x:Name="PowerRate" Margin="4, 0, 4, 0"/>
                 </StackPanel>
             </Grid>
             <StackPanel x:Name="BatteryHealth" Margin="12, 12, 12, 0" Orientation="Horizontal" x:Load="{x:Bind Settings.IsHealthEnabled, Mode=OneWay}">
-                <TextBlock FontWeight="SemiBold" Text="Battery Health: "/>
-                <TextBlock x:Name="BatteryHealthText" Margin="4, 0, 4, 0"/>
+                <TextBlock IsTabStop="false" FontWeight="SemiBold" Text="Battery Health: "/>
+                <TextBlock IsTabStop="false" x:Name="BatteryHealthText" Margin="4, 0, 4, 0"/>
             </StackPanel>
-            <TextBlock FontSize="14" FontWeight="SemiBold" Text="Power Mode" Margin="12, 8, 8, 0" Visibility="{x:Bind Settings.IsPowerSliderEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibility}}"/>
+            <TextBlock IsTabStop="false" FontSize="14" FontWeight="SemiBold" Text="Power Mode" Margin="12, 8, 8, 0" Visibility="{x:Bind Settings.IsPowerSliderEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibility}}"/>
 
-            <Slider x:Name="PowerSlider" x:Load="{x:Bind Settings.IsPowerSliderEnabled, Mode=OneWay}" Value="{x:Bind Power.CurrentPowerPlan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PowerPlanConverter}}" Style="{ThemeResource GlowSlider}" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" Margin="12, 0, 0, 0" TickPlacement="Outside" TickFrequency="1" Width="344" Minimum="0" Maximum="3"/>
+            <Slider TabIndex="0" x:Name="PowerSlider" x:Load="{x:Bind Settings.IsPowerSliderEnabled, Mode=OneWay}" Value="{x:Bind Power.CurrentPowerPlan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PowerPlanConverter}}" Style="{ThemeResource GlowSlider}" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" Margin="12, 0, 0, 0" TickPlacement="Outside" TickFrequency="1" Width="344" Minimum="0" Maximum="3" />
 
             <Grid Margin="0, 0, 0, 12" Visibility="{x:Bind Settings.IsPowerSliderEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
                 <StackPanel Orientation="Horizontal">
                     <icons:FluentSymbolIcon Symbol="LeafThree20" Foreground="{ThemeResource HvidSortBrush}" Margin="6, 0, 0, 4" Opacity="0.7"/>
-                    <TextBlock FontSize="12" Opacity="0.7" VerticalAlignment="Center" Margin="4, 0, 0, 4"  Text="High efficiency"/>
+                    <TextBlock IsTabStop="false" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Margin="4, 0, 0, 4"  Text="High efficiency"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 14, 0">
-                    <TextBlock FontSize="12" Opacity="0.7" VerticalAlignment="Center" Margin="6, 0, 0, 4"  Text="High performance"/>
+                    <TextBlock IsTabStop="false" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Margin="6, 0, 0, 4"  Text="High performance"/>
                     <icons:FluentSymbolIcon Symbol="TopSpeed20" Foreground="{ThemeResource HvidSortBrush}" Margin="4, 2, 0, 4" Opacity="0.7"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
         <Grid x:Name="Target" Background="{ThemeResource LayerFillColorDefaultBrush}" Height="40" VerticalAlignment="Bottom">
-            <Button Style="{ThemeResource SettingsToolbarButton}" Margin="2, 0, 4, 0" HorizontalAlignment="Right" Command="{x:Bind Settings.LaunchSettingsCommand}"/>
+            <Button TabIndex="1" Style="{ThemeResource SettingsToolbarButton}" Margin="2, 0, 4, 0" HorizontalAlignment="Right" Command="{x:Bind Settings.LaunchSettingsCommand}" />
         </Grid>
         <TeachingTip x:Name="Tip"
                      IsOpen="False"
