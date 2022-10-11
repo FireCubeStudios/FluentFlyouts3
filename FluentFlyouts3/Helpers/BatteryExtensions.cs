@@ -34,11 +34,11 @@ namespace FluentFlyouts3.Helpers
         public static string GetRemainingCapacity(this BatteryReport report) => mWhToWh((double)report.RemainingCapacityInMilliwattHours) + " Wh";
 
         /// <summary>
-        /// Gets discharge/charge rate in Wh.
+        /// Gets discharge/charge rate in W.
         /// </summary>
         /// <param name="report">A BatteryReport object.</param>
-        /// <returns>Returns a string with discharge/charge in Wh</returns>
-        public static string GetPowerRate(this BatteryReport report) => mWhToWh((double)report.ChargeRateInMilliwatts) + " Wh";
+        /// <returns>Returns a string with discharge/charge in W</returns>
+        public static string GetPowerRate(this BatteryReport report) => mWhToWh((double)report.ChargeRateInMilliwatts) + " W";
 
         /// <summary>
         /// Gets battery health information
