@@ -10,7 +10,7 @@
   <Identity
     Name="2505FireCubeStudios.FluentFlyouts"
     Publisher="CN=3C7C8FC9-7104-4B33-8730-EE1E929D5D3B"
-    Version="0.0.1.0" />
+    Version="3.0.8.0" />
 
   <Properties>
     <DisplayName>Fluent Flyouts Battery (Preview)</DisplayName>

@@ -37,25 +37,50 @@ namespace FluentFlyouts3.Icons
             Timer.Start();
             Theme = new ThemeListener();
             Theme.ThemeChanged += Listener_ThemeChanged;
-            Debug.WriteLine(Theme.CurrentThemeName);
             return true;
         }
 
         private void Update()
         {
-            BatteryReport Info = Battery.AggregateBattery.GetReport();
-            FlyoutIcon.ToolTipText = $"{Info.GetPercentageText()} - {Info.GetRemaningTimeText()}";
-            string Status = "";
-            string value = Info.GetAbsolutePercentage().ToString();
-            if (Info.Status == BatteryStatus.Charging)
-                Status = "Charging";
-            else if (Power.CurrentPowerPlan == PowerMode.PowerSaver)
-                Status = "PowerSaver";
-            Timer.Interval = new TimeSpan(0, 0, 30);
-            Uri Icon = new Uri($"ms-appx:///Assets/BatteryIcons/Battery{Status}{Theme.CurrentThemeName}{value}.ico", UriKind.Absolute);
-            BitmapImage bitmap = new BitmapImage(Icon);
-            FlyoutIcon.ForceCreate();
-            FlyoutIcon.IconSource = bitmap;
+            try
+            {
+                BatteryReport Info = Battery.AggregateBattery.GetReport();
+                string Status = "";
+                string value = Info.GetAbsolutePercentage().ToString();
+
+                Timer.Interval = new TimeSpan(0, 0, 30);
+                SetToolTip();
+
+                if (Info.Status == BatteryStatus.Charging)
+                    Status = "Charging";
+                else if (Power.CurrentPowerPlan == PowerMode.PowerSaver)
+                    Status = "PowerSaver";
+
+                Uri Icon = new Uri($"ms-appx:///Assets/BatteryIcons/Battery{Status}{Theme.CurrentThemeName}{value}.ico", UriKind.Absolute);
+                BitmapImage bitmap = new BitmapImage(Icon);
+                FlyoutIcon.ForceCreate();
+                FlyoutIcon.IconSource = bitmap;
+            }
+            catch // Error could occur if icon unavailable so try again
+            {
+                Uri Icon = new Uri($"ms-appx:///Assets/BatteryIcons/Battery{Theme.CurrentThemeName}0.ico", UriKind.Absolute);
+                BitmapImage bitmap = new BitmapImage(Icon);
+                FlyoutIcon.ForceCreate();
+                FlyoutIcon.IconSource = bitmap;
+            }
+        }
+
+        private void SetToolTip()
+        {
+            try
+            {
+                BatteryReport Info = Battery.AggregateBattery.GetReport();
+                FlyoutIcon.ToolTipText = $"{Info.GetPercentageText()} - {Info.GetRemaningTimeText()}";
+            }
+            catch
+            {
+                FlyoutIcon.ToolTipText = $"Failed to load Tooltip";
+            }
         }
 
         private void Refresh_Tick(object sender, object e) => Update();

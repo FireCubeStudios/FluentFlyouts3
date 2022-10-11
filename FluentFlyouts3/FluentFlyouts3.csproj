@@ -9,7 +9,6 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
-    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <UseWPF>False</UseWPF>
     <UseWindowsForms>False</UseWindowsForms>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
@@ -31,6 +30,7 @@
   <ItemGroup>
     <None Remove="Controls\BatteryFlyoutControl.xaml" />
     <None Remove="Flyouts\BatteryFlyout.xaml" />
+    <None Remove="Flyouts\TestWidget.xaml" />
     <None Remove="SettingsWindow.xaml" />
   </ItemGroup>
 
@@ -80,5 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="AppPackages\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Flyouts\TestWidget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

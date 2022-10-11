@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="BaseWindow.xaml" />
     <None Remove="Controls\FlyoutIcon.xaml" />
+    <None Remove="DesktopWidgetWindow.xaml" />
     <None Remove="FlyoutWindow.xaml" />
     <None Remove="Styles\IconTheme.xaml" />
     <None Remove="TransparentWindow.xaml" />
@@ -24,6 +25,12 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="DesktopWidgetWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

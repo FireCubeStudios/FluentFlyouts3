@@ -54,8 +54,17 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Grid Background="{ThemeResource LayerFillColorDefaultBrush}" Height="40" VerticalAlignment="Bottom">
+        <Grid x:Name="Target" Background="{ThemeResource LayerFillColorDefaultBrush}" Height="40" VerticalAlignment="Bottom">
             <Button Style="{ThemeResource SettingsToolbarButton}" Margin="2, 0, 4, 0" HorizontalAlignment="Right" Command="{x:Bind Settings.LaunchSettingsCommand}"/>
         </Grid>
+        <TeachingTip x:Name="Tip"
+                     IsOpen="False"
+    Target="{x:Bind Target}"
+    Title="Drag the flyout to any position"
+    Subtitle="Drag the shaded region to move the flyout where you want!">
+            <TeachingTip.IconSource>
+                <SymbolIconSource Symbol="Refresh" />
+            </TeachingTip.IconSource>
+        </TeachingTip>
     </Grid>
 </UserControl>

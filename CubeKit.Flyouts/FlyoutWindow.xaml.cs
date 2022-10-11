@@ -8,6 +8,8 @@ using Microsoft.UI.Xaml.Input;
 using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using CubeKit.Flyouts.Interfaces;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -16,11 +18,14 @@ namespace CubeKit.Flyouts
     /// <summary>
     /// A flyout window
     /// </summary>
-    public partial class FlyoutWindow : BaseWindow
+    public partial class FlyoutWindow : BaseWindow, IFlyoutWindow
     {
+        public IPositionHelper FlyoutPositionHelper = new PositionHelper();
+        public IIconManager FlyoutIconManager;
+
         public FlyoutWindow()
         {
-            PositionHelper.Positionflyout(this);
+            FlyoutPositionHelper.Positionflyout(this);
             this.InitializeComponent();
             this.SetTitleBarBackgroundColors(Colors.Transparent);
             this.BringToFront();

@@ -17,18 +17,14 @@ namespace FluentFlyouts3.Services
 
         public SettingsService()
         {
-            if (SystemInformation.Instance.IsFirstRun)
-            {
-                IsPowerSliderEnabled = true;
-                IsAdditionalInformationEnabled = true;
-                IsHealthEnabled = true;
-            }
-            else if (SystemInformation.Instance.IsAppUpdated)
+            if (SystemInformation.Instance.IsAppUpdated)
             {
                 // Place new 
                 IsPowerSliderEnabled = true;
                 IsAdditionalInformationEnabled = true;
                 IsHealthEnabled = true;
+                XB = 100;
+                YB = 100;
             }
         }
 
