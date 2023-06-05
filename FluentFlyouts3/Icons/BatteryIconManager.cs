@@ -1,6 +1,5 @@
 ﻿using CubeKit.Flyouts;
 using CubeKit.Flyouts.Interfaces;
-using H.NotifyIcon;
 using H.NotifyIcon.Core;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System;
@@ -22,7 +21,7 @@ namespace FluentFlyouts3.Icons
 {
     public class BatteryIconManager : IIconManager
     {
-        public TaskbarIcon FlyoutIcon { get; set; }
+        public TrayIcon FlyoutIcon { get; set; }
         public BaseWindow FlyoutWindow { get; set; }
 
         private PowerService Power = App.Current.Services.GetService<PowerService>();
@@ -58,15 +57,15 @@ namespace FluentFlyouts3.Icons
 
                 Uri Icon = new Uri($"ms-appx:///Assets/BatteryIcons/Battery{Status}{Theme.CurrentThemeName}{value}.ico", UriKind.Absolute);
                 BitmapImage bitmap = new BitmapImage(Icon);
-                FlyoutIcon.ForceCreate();
-                FlyoutIcon.IconSource = bitmap;
+              //  FlyoutIcon.ForceCreate();
+              //  FlyoutIcon.
             }
             catch // Error could occur if icon unavailable so try again
             {
                 Uri Icon = new Uri($"ms-appx:///Assets/BatteryIcons/Battery{Theme.CurrentThemeName}0.ico", UriKind.Absolute);
                 BitmapImage bitmap = new BitmapImage(Icon);
-                FlyoutIcon.ForceCreate();
-                FlyoutIcon.IconSource = bitmap;
+              //  FlyoutIcon.ForceCreate();
+              //  FlyoutIcon.IconSource = bitmap;
             }
         }
 
@@ -75,11 +74,11 @@ namespace FluentFlyouts3.Icons
             try
             {
                 BatteryReport Info = Battery.AggregateBattery.GetReport();
-                FlyoutIcon.ToolTipText = $"{Info.GetPercentageText()} - {Info.GetRemaningTimeText()}";
+             //   FlyoutIcon.ToolTipText = $"{Info.GetPercentageText()} - {Info.GetRemaningTimeText()}";
             }
             catch
             {
-                FlyoutIcon.ToolTipText = $"Failed to load Tooltip";
+              //  FlyoutIcon.ToolTipText = $"Failed to load Tooltip";
             }
         }
 

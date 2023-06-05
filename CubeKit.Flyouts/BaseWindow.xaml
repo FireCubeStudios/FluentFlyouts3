@@ -12,15 +12,10 @@
     IsShownInSwitchers="False"
     IsTitleBarVisible="False"
     mc:Ignorable="d">
-    <winex:WindowEx.Backdrop>
-        <winex:MicaSystemBackdrop  />
-    </winex:WindowEx.Backdrop>
     <Grid>
         <Grid.Resources>
             <ResourceDictionary Source="ms-appx:///CubeKit.Flyouts/Styles/FlyoutTheme.xaml" />
         </Grid.Resources>
-        <Border BorderBrush="{ThemeResource MicaBorderBrush}" BorderThickness="1">
-            <ContentControl/>
-        </Border>
+        <ContentControl/>
     </Grid>
 </winex:WindowEx>

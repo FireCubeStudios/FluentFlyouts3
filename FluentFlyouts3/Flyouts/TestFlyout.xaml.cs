@@ -1,4 +1,8 @@
-﻿using Microsoft.UI.Xaml;
+// Copyright (c) Microsoft Corporation and Contributors.
+// Licensed under the MIT License.
+
+using CubeKit.Flyouts;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -16,14 +20,14 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace CubeKit.Flyouts
+namespace FluentFlyouts3.Flyouts
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class DesktopWidgetWindow : BaseWindow
+    public sealed partial class TestFlyout : FlyoutWindow
     {
-        public DesktopWidgetWindow()
+        public TestFlyout()
         {
             this.InitializeComponent();
         }

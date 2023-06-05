@@ -1,4 +1,4 @@
-﻿using H.NotifyIcon;
+﻿using H.NotifyIcon.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace CubeKit.Flyouts.Interfaces
 {
     public interface IIconManager
     {
-        public TaskbarIcon FlyoutIcon { get; set; }
+        public TrayIcon FlyoutIcon { get; set; }
 
         public bool Initialize();
 

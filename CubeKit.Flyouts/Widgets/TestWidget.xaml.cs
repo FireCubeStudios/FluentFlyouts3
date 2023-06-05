@@ -25,7 +25,7 @@ namespace FluentFlyouts3.Flyouts
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TestWidget : DesktopWidgetWindow
+    public sealed partial class TestWidget : WindowEx
     {
         public Rect MonitorRect { get; private set; }
         public TestWidget()
@@ -36,7 +36,7 @@ namespace FluentFlyouts3.Flyouts
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             var rect = new Rect();
-            var handle = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            var handle = this.GetWindowHandle();
             SendMessageToProgman();
             EnableExToolWindow(handle, true);
             var workerWHandle = GetWorkerW(handle);

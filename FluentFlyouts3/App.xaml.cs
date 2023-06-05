@@ -3,6 +3,7 @@ using CubeKit.Flyouts;
 using FluentFlyouts3.Flyouts;
 using FluentFlyouts3.Services;
 using H.NotifyIcon;
+using H.NotifyIcon.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -14,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -77,7 +79,16 @@ namespace FluentFlyouts3
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new BatteryFlyout(); // Temporary for v1
+           /* TrayIcon trayIcon = new()
+            {
+                Icon =
+                new Bitmap(
+                    @$"{Package.Current.InstalledPath}\Assets\LockScreenLogo.scale-200.png"
+                ).GetHicon(),
+                Visibility = IconVisibility.Visible
+            };
+            trayIcon.Create();*/
+            m_window = new TestFlyout(); // Temporary for v1
             m_window.Activate();
         }
 

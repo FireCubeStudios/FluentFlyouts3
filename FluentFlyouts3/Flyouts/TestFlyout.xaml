@@ -1,13 +1,15 @@
-﻿<flyouts:DesktopWidgetWindow
+<flyouts:FlyoutWindow
     xmlns:flyouts="using:CubeKit.Flyouts"
-    x:Class="FluentFlyouts3.Flyouts.TestWidget"
+    x:Class="FluentFlyouts3.Flyouts.TestFlyout"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FluentFlyouts3.Flyouts"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    <Grid Loaded="Grid_Loaded">
-        <Button>eck</Button>
-    </Grid>
-</flyouts:DesktopWidgetWindow>
+    xmlns:flyoutcontrols="using:CubeKit.Flyouts.Controls"
+    xmlns:controls="using:FluentFlyouts3.Controls"
+    mc:Ignorable="d"
+    Height="240"
+    Width="300">
+    <Grid Background="Black" Height="250" Width="300"></Grid>
+</flyouts:FlyoutWindow>

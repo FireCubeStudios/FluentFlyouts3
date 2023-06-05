@@ -25,7 +25,7 @@ namespace CubeKit.Flyouts
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TransparentWindow : Window
+    public sealed partial class LegacyTransparentWindow : Window
     {
         public const int WM_CREATE = 0x0001;
         public const int WM_NCHITTEST = 0x0084;
@@ -490,7 +490,7 @@ namespace CubeKit.Flyouts
         public static extern IntPtr GetModuleHandle(string modName);
 
 
-        public TransparentWindow()
+        public LegacyTransparentWindow()
         {
             this.InitializeComponent();
 

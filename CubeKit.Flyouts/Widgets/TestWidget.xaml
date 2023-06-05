@@ -1,0 +1,17 @@
+﻿<winex:WindowEx  
+    xmlns:winex="using:WinUIEx"
+    xmlns:flyouts="using:CubeKit.Flyouts"
+    x:Class="FluentFlyouts3.Flyouts.TestWidget"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentFlyouts3.Flyouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Height="1800"
+    Width="1800"
+    mc:Ignorable="d">
+    <Grid Loaded="Grid_Loaded"  Height="1800"
+    Width="1800">
+        <Button>eck</Button>
+    </Grid>
+</winex:WindowEx>

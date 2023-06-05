@@ -6,13 +6,11 @@
     xmlns:local="using:FluentFlyouts3.Flyouts"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:flyoutcontrols="using:CubeKit.Flyouts.Controls"
     xmlns:controls="using:FluentFlyouts3.Controls"
     mc:Ignorable="d"
     Height="240"
     Width="370">
     <Grid ManipulationDelta="Flyout_ManipulationDelta" ManipulationMode="TranslateX, TranslateY">
-        <flyoutcontrols:FlyoutIcon x:Name="Icon" Window="{x:Bind }"/>
         <controls:BatteryFlyoutControl x:Name="Content" Height="240"/>
     </Grid>
 </flyouts:FlyoutWindow>

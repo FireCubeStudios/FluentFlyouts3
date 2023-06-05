@@ -23,7 +23,6 @@ namespace FluentFlyouts3.Flyouts
         {
             this.InitializeComponent();
             FlyoutPositionHelper.Positionflyout(this);
-            Icon.IconManager = FlyoutIconManager;
         }
 
         private void Flyout_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
