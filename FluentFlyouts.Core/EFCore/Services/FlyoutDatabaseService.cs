@@ -9,14 +9,17 @@ namespace FluentFlyouts.Core.EFCore.Services
 {
 	public class FlyoutDatabaseService : IFlyoutDatabaseService
 	{
+		private FlyoutDBContext Context;
+		public FlyoutDatabaseService(FlyoutDBContext context) 
+		{
+			Context = context;
+		}
+
 		public void AddBatteryHistory(BatteryHistory batteryHistory)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IList<BatteryHistory> GetBatteryHistory()
-		{
-			throw new NotImplementedException();
-		}
+		public IList<BatteryHistory> GetBatteryHistory() => Context.BatteryHistory.ToList();
 	}
 }

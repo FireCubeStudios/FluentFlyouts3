@@ -8,7 +8,13 @@ namespace FluentFlyouts.Core.EFCore.Models
 {
 	public class BatteryHistory
 	{
-		public int Percentage { get; set; }
+		public double Percentage { get; set; }
 		public DateTime Time { get; set; }
+
+		public BatteryHistory(double percentage, DateTime time) 
+		{
+			Percentage = percentage;
+			Time = time;
+		}
 	}
 }
