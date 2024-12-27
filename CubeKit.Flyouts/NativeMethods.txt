@@ -1,4 +1,0 @@
-﻿WINDOW_EX_STYLE
-GetWindowLong
-WM_ERASEBKGND
-SetWindowLong
