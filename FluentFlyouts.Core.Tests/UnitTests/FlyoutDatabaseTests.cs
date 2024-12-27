@@ -37,10 +37,17 @@ namespace FluentFlyouts.Core.Tests.UnitTests
 			Assert.NotEmpty(list); // List should not be empty
 			Assert.Equal(history.Percentage, list[0].Percentage); // Item should be the same
 			Assert.Equal(history.Time, list[0].Time); // Item should be the same
+		}
 
+		[Fact]
+		public void AddInvalidBatteryHistory()
+		{
 			// Ensure it fails if null is added or if invalid BatteryHistory is added
 			Assert.ThrowsAny<Exception>(() => databaseService.AddBatteryHistory(null));
 			Assert.ThrowsAny<Exception>(() => databaseService.AddBatteryHistory(new BatteryHistory(-1, DateTime.Now.AddDays(1))));
+
+			var list = databaseService.GetBatteryHistory();
+			Assert.Empty(list); // List should be empty as none of the items should have been added
 		}
 
 		[Fact]

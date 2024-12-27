@@ -17,7 +17,9 @@ namespace FluentFlyouts.Core.EFCore.Services
 
 		public void AddBatteryHistory(BatteryHistory batteryHistory)
 		{
-			throw new NotImplementedException();
+			if (batteryHistory.Percentage < 0 || batteryHistory.Time > DateTime.Now) throw new Exception("Invalid BatteryHistory item");
+			Context.BatteryHistory.Add(batteryHistory);
+			Context.SaveChanges();
 		}
 
 		public IList<BatteryHistory> GetBatteryHistory() => Context.BatteryHistory.ToList();
