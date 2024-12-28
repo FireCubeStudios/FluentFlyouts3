@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
@@ -12,6 +12,10 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Flyouts\BatteryFlyout.xaml" />
+    <None Remove="Flyouts\CalendarFlyout.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -36,11 +40,25 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
+    <PackageReference Include="PowerStatus" Version="1.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CubeKit.UI\CubeKit.UI.csproj" />
     <ProjectReference Include="..\FluentFlyouts.Core\FluentFlyouts.Core.csproj" />
+    <ProjectReference Include="..\FluentFlyouts.Flyouts\FluentFlyouts.Flyouts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Flyouts\CalendarFlyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Flyouts\BatteryFlyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--

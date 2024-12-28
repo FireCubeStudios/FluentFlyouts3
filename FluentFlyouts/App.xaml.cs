@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using FluentFlyouts.Flyouts;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -43,8 +44,16 @@ namespace FluentFlyouts
         {
             m_window = new MainWindow();
             m_window.Activate();
-        }
+
+            var tray = new TrayIcon(1, "", "Battery");
+            f_window = new TrayFlyoutWindow(tray, new BatteryFlyout(tray));
+
+			var tray2 = new TrayIcon(2, "", "Calendar");
+			c_window = new TrayFlyoutWindow(tray2, new CalendarFlyout(tray2));
+		}
 
         private Window? m_window;
-    }
+		private Window? f_window;
+		private Window? c_window;
+	}
 }

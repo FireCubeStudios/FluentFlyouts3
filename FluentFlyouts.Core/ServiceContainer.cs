@@ -1,5 +1,6 @@
 ﻿using FluentFlyouts.Core.EFCore;
-using FluentFlyouts.Core.EFCore.Services;
+using FluentFlyouts.Core.EFCore.Repositories;
+using FluentFlyouts.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace FluentFlyouts.Core
 
 		public static IServiceProvider ConfigureServices(IServiceCollection services)
 		{
-			services.AddSingleton<IFlyoutDatabaseService, FlyoutDatabaseService>();
+			services.AddSingleton<IBatteryRepository, BatteryRepository>();
+			services.AddSingleton<BatteryService>();
 
 			Services = services.BuildServiceProvider();
 			return Services;

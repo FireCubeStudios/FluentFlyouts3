@@ -1,7 +1,8 @@
 {
   "profiles": {
     "FluentFlyouts (Package)": {
-      "commandName": "MsixPackage"
+      "commandName": "MsixPackage",
+      "nativeDebugging": true
     },
     "FluentFlyouts (Unpackaged)": {
       "commandName": "Project"
