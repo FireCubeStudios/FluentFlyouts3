@@ -39,6 +39,7 @@ namespace FluentFlyouts.Flyouts
 			TrayIcon.LeftClicked += (sender, e) => ShowFlyout();
 
 			this.Flyout.Content = flyoutContent;
+
 		//	this.Content.LostFocus += (sender, e) => this.Hide();
 		}
 

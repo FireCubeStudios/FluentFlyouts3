@@ -53,7 +53,7 @@ namespace FluentFlyouts
 		}
 
         private Window? m_window;
-		private Window? f_window;
+		public static Window? f_window;
 		private Window? c_window;
 	}
 }
