@@ -22,6 +22,6 @@ namespace FluentFlyouts.Core.EFCore.Services
 			Context.SaveChanges();
 		}
 
-		public IList<BatteryHistory> GetBatteryHistory() => Context.BatteryHistory.ToList();
+		public IList<BatteryHistory> GetBatteryHistory() => Context.BatteryHistory.OrderByDescending(x => x.Time).ToList();
 	}
 }

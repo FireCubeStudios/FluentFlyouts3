@@ -13,12 +13,9 @@ namespace FluentFlyouts.Core
 	{
 		public static IServiceProvider? Services { get; set; }
 
-		public static IServiceProvider ConfigureServices()
+		public static IServiceProvider ConfigureServices(IServiceCollection services)
 		{
-			ServiceCollection services = new ServiceCollection();
-
 			services.AddSingleton<IFlyoutDatabaseService, FlyoutDatabaseService>();
-			services.AddDbContext<FlyoutDBContext>();
 
 			Services = services.BuildServiceProvider();
 			return Services;

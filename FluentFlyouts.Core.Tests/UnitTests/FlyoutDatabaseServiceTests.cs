@@ -8,11 +8,11 @@ using System.Collections.Generic;
 
 namespace FluentFlyouts.Core.Tests.UnitTests
 {
-	public class FlyoutDatabaseTests
+	public class FlyoutDatabaseServiceTests
 	{
 		private IFlyoutDatabaseService databaseService;
 
-		public FlyoutDatabaseTests() 
+		public FlyoutDatabaseServiceTests() 
 		{
 			var options = new DbContextOptionsBuilder<FlyoutDBContext>().UseSqlite(new SqliteConnection("Filename=:memory:")).Options;
 			
@@ -55,7 +55,23 @@ namespace FluentFlyouts.Core.Tests.UnitTests
 		{
 			var list = databaseService.GetBatteryHistory();
 			Assert.Empty(list); // List should be empty first
-			Assert.IsAssignableFrom<IList<BatteryHistory>>(list);
+
+			// Add items in random order and check if they come back in descending order
+			databaseService.AddBatteryHistory(new BatteryHistory(70, DateTime.Now.AddDays(-2)));
+			databaseService.AddBatteryHistory(new BatteryHistory(70, DateTime.Now.AddDays(-1)));
+			databaseService.AddBatteryHistory(new BatteryHistory(70, DateTime.Now.AddDays(-3)));
+
+			list = databaseService.GetBatteryHistory();
+			Assert.NotEmpty(list); // List should not be empty
+			Assert.Equal(3, list.Count); // List should have 3 items
+
+			// Check if list items are in descending order
+			for(int i = 0; i < list.Count - 1; i++)
+			{
+				if(list[i] == null) Assert.Fail();
+
+				if (list[i].Time < list[i + 1].Time) Assert.Fail();
+			}
 		}
 	}
 }
