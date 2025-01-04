@@ -12,23 +12,26 @@
     IsAlwaysOnTop="True"
     IsResizable="False"
     IsShownInSwitchers="False">
-    <ContentControl x:Name="Container">
-        <Flyout x:Name="Flyout" Closed="Flyout_Closed" Placement="Top" ShouldConstrainToRootBounds="False">
-            <Flyout.SystemBackdrop>
-                <MicaBackdrop/>
-            </Flyout.SystemBackdrop>
-            <Flyout.FlyoutPresenterStyle>
-                <Style TargetType="FlyoutPresenter">
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="Margin" Value="0, -8, 0, 0" />
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="CornerRadius" Value="8" />
-                    <Setter Property="MaxWidth" Value="1000" />
-                    <Setter Property="MaxHeight" Value="1000" />
-                    <Setter Property="IsDefaultShadowEnabled" Value="True"/>
-                </Style>
-            </Flyout.FlyoutPresenterStyle>
-        </Flyout>
-    </ContentControl>
+    <Grid>
+        <ContentControl x:Name="FlyoutContainer">
+            <Flyout x:Name="Flyout" Closed="Flyout_Closed" Placement="Top" ShouldConstrainToRootBounds="False">
+                <Flyout.SystemBackdrop>
+                    <MicaBackdrop/>
+                </Flyout.SystemBackdrop>
+                <Flyout.FlyoutPresenterStyle>
+                    <Style TargetType="FlyoutPresenter">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0, -8, 0, 0" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="CornerRadius" Value="8" />
+                        <Setter Property="MaxWidth" Value="1000" />
+                        <Setter Property="MaxHeight" Value="1000" />
+                        <Setter Property="IsDefaultShadowEnabled" Value="True"/>
+                    </Style>
+                </Flyout.FlyoutPresenterStyle>
+            </Flyout>
+        </ContentControl>
+        <ContentControl x:Name="ContextFlyoutContainer"/>
+    </Grid>
 </winuiex:WindowEx>

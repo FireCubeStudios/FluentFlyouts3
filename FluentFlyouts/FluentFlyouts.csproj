@@ -17,8 +17,18 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Generated Files\**" />
+	  <EmbeddedResource Remove="Generated Files\**" />
+	  <None Remove="Generated Files\**" />
+	  <Page Remove="Generated Files\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Calendar\Controls\ClockControl.xaml" />
+		<None Remove="Calendar\Pages\ClockSettingsPage.xaml" />
 		<None Remove="Flyouts\BatteryFlyout.xaml" />
-		<None Remove="Flyouts\CalendarFlyout.xaml" />
+		<None Remove="Flyouts\ClockFlyout.xaml" />
+		<None Remove="Flyouts\VolumeFlyout.xaml" />
+		<None Remove="Pages\HomeSettingsPage.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -27,7 +37,6 @@
 		<Content Include="Assets\Square150x150Logo.scale-200.png" />
 		<Content Include="Assets\Square44x44Logo.scale-200.png" />
 		<Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-		<Content Include="Assets\StoreLogo.png" />
 		<Content Include="Assets\Wide310x150Logo.scale-200.png" />
 	</ItemGroup>
 
@@ -56,7 +65,12 @@
 		<ProjectReference Include="..\FluentFlyouts.Flyouts\FluentFlyouts.Flyouts.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Page Update="Flyouts\CalendarFlyout.xaml">
+	  <Page Update="Flyouts\VolumeFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+		<Page Update="Flyouts\ClockFlyout.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
 	</ItemGroup>
@@ -64,6 +78,10 @@
 		<Page Update="Flyouts\BatteryFlyout.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Battery\Flyouts\" />
+	  <Folder Include="Calendar\Assets\" />
 	</ItemGroup>
 
 	<!--
@@ -91,4 +109,24 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
 		<Optimize>True</Optimize>
 	</PropertyGroup>
+	<ItemGroup>
+	  <PRIResource Remove="Generated Files\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Calendar\Assets\ClockDark.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Calendar\Assets\ClockLight.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <Page Update="Pages\HomeSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Calendar\Pages\ClockSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Calendar\Controls\ClockControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
 </Project>

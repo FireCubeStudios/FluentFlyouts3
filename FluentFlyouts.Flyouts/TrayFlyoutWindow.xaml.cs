@@ -28,7 +28,9 @@ namespace FluentFlyouts.Flyouts
 	public sealed partial class TrayFlyoutWindow : WindowEx
 	{
 		private TrayIcon TrayIcon;
-		public TrayFlyoutWindow(TrayIcon trayIcon, UIElement flyoutContent)
+
+		public MenuFlyout? ContextFlyout;
+		public TrayFlyoutWindow(TrayIcon trayIcon, UIElement flyoutContent, MenuFlyout contextFlyout = null)
 		{
 			this.InitializeComponent();
 			this.SetExtendedWindowStyle(ExtendedWindowStyle.Transparent);
@@ -40,6 +42,16 @@ namespace FluentFlyouts.Flyouts
 
 			this.Flyout.Content = flyoutContent;
 
+			if (contextFlyout is not null)
+			{
+				this.ContextFlyout = contextFlyout;
+				TrayIcon.RightClicked += (sender, e) => ShowMenuFlyout();
+				ContextFlyoutContainer.Content = ContextFlyout;
+				contextFlyout.SystemBackdrop = new MicaBackdrop();
+				contextFlyout.Placement = FlyoutPlacementMode.Top;
+				contextFlyout.ShouldConstrainToRootBounds = false;
+			}
+
 		//	this.Content.LostFocus += (sender, e) => this.Hide();
 		}
 
@@ -49,9 +61,23 @@ namespace FluentFlyouts.Flyouts
 			this.MoveAndResize((double)Win32.GetCursorPosition().X, (double)Win32.GetCursorPosition().Y, 0, 0);
 			FlyoutShowOptions options = new FlyoutShowOptions();
 			options.Position = new Point(0, 0);
-			this.Flyout.ShowAt(this.Container, options);
+			this.Flyout.ShowAt(this.FlyoutContainer, options);
 			//FlyoutBase.ShowAttachedFlyout(Container);
 			Win32.SetForegroundWindow(this.GetWindowHandle());
+		}
+
+		public void ShowMenuFlyout()
+		{
+			if (ContextFlyout is not null)
+			{
+				this.Activate();
+				this.MoveAndResize((double)Win32.GetCursorPosition().X, (double)Win32.GetCursorPosition().Y, 0, 0);
+				FlyoutShowOptions options = new FlyoutShowOptions();
+				options.Position = new Point(0, 0);
+				this.ContextFlyout.ShowAt(this.ContextFlyoutContainer, options);
+				//FlyoutBase.ShowAttachedFlyout(Container);
+				Win32.SetForegroundWindow(this.GetWindowHandle());
+			}
 		}
 
 		private void Flyout_Closed(object sender, object e) => this.Hide();

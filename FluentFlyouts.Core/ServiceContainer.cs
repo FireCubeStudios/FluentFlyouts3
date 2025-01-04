@@ -1,12 +1,13 @@
-﻿using FluentFlyouts.Core.EFCore;
-using FluentFlyouts.Core.EFCore.Repositories;
-using FluentFlyouts.Core.Services;
+﻿using FluentFlyouts.Core.Battery.EFCore.Repositories;
+using FluentFlyouts.Core.Battery.Services;
+using FluentFlyouts.Core.Battery.EFCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentFlyouts.Core.Battery.ViewModels;
 
 namespace FluentFlyouts.Core
 {
@@ -18,6 +19,7 @@ namespace FluentFlyouts.Core
 		{
 			services.AddSingleton<IBatteryRepository, BatteryRepository>();
 			services.AddSingleton<BatteryService>();
+			services.AddSingleton<BatteryFlyoutViewModel>();
 
 			Services = services.BuildServiceProvider();
 			return Services;

@@ -43,6 +43,21 @@ namespace FluentFlyouts.Flyouts
 			Shell_NotifyIcon(NIM_ADD, ref notifyIconData);
 		}
 
+		public void UpdateIcon(string Icon)
+		{
+			notifyIconHandle = LoadIcon(Icon);
+			notifyIconData.hIcon = notifyIconHandle;
+
+			Shell_NotifyIcon(NIM_MODIFY, ref notifyIconData);
+		}
+
+		public void UpdateTooltip(string ToolTip)
+		{
+			notifyIconData.szTip = ToolTip.PadRight(128, '\0');
+
+			Shell_NotifyIcon(NIM_MODIFY, ref notifyIconData);
+		}
+
 		private void SetWndProc()
 		{
 			GCHandle.Alloc(wndProcDelegate);

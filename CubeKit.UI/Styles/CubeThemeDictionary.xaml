@@ -66,7 +66,7 @@
                     <SolidColorBrush x:Key="ResponsiveAccentBrush2" Color="{ThemeResource SystemAccentColorDark2}"/>
                     <SolidColorBrush x:Key="ResponsiveAccentBrush1" Color="{ThemeResource SystemAccentColorDark1}"/>
                     <SolidColorBrush x:Key="MicaBrush" Color="#FCFCFC" Opacity="0.8"/>
-                    <SolidColorBrush x:Key="MicaDarkBrush" Color="#161616" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="MicaDarkBrush" Color="#E9E9E9" Opacity="0.4"/>
                     <SolidColorBrush x:Key="MicaBorderBrush" Color="#757575" Opacity="0.4"/>
                     <SolidColorBrush x:Key="BorderHighContrastBrush" Color="Transparent" />
                 </ResourceDictionary>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="FluentFlyouts.Pages.HomeSettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentFlyouts.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:settings="using:CubeKit.UI.Controls.Settings" xmlns:icons="using:FluentIcons.WinUI"
+    mc:Ignorable="d">
+
+    <Grid Padding="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <TextBlock Text="Fluent Flyouts" FontSize="24" FontWeight="SemiBold"/>
+                <TextBlock Text=" - v4 preview" FontSize="16" FontWeight="SemiBold" Opacity="0.7" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 24, 4, 4">Options</TextBlock>
+                <settings:SettingsBlockControl Title="Run on startup" Margin="2" Description="Run the app on Windows startup (recommended)">
+                    <settings:SettingsBlockControl.Icon>
+                        <icons:SymbolIcon Symbol="ClockAlarm" FontSize="24"/>
+                    </settings:SettingsBlockControl.Icon>
+                    <ToggleSwitch Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
+                </settings:SettingsBlockControl>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

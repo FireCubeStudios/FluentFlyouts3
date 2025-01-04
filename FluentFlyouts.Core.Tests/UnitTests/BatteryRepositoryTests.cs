@@ -1,6 +1,6 @@
-﻿using FluentFlyouts.Core.EFCore;
-using FluentFlyouts.Core.EFCore.Models;
-using FluentFlyouts.Core.EFCore.Repositories;
+﻿using FluentFlyouts.Core.Battery.EFCore;
+using FluentFlyouts.Core.Battery.EFCore.Models;
+using FluentFlyouts.Core.Battery.EFCore.Repositories;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
