@@ -1,58 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static FluentFlyouts.Flyouts.Helpers.Win32;
+using TerraFX.Interop.Windows;
+using static TerraFX.Interop.Windows.Windows;
 
 namespace FluentFlyouts.Flyouts
 {
 	public partial class TrayIcon
 	{
-		private IntPtr CreateWindow(string Icon)
+		private unsafe HWND CreateWindow(string Icon)
 		{
-			var wndClass = new WndClassEx
+			fixed (char* lpszClassName = "SystemTrayIconWindowClass" + Id.ToString())
+			fixed (char* lpWindowName = Id.ToString())
 			{
-				cbSize = (uint)Marshal.SizeOf<WndClassEx>(),
-				style = 0,
-				lpfnWndProc = Marshal.GetFunctionPointerForDelegate(wndProcDelegate),
-				hInstance = GetModuleHandle(null),
-				hIcon = LoadIcon(Icon),
-				hCursor = LoadCursor(),
-				lpszClassName = "SystemTrayIconWindowClass" + Id.ToString(),
-			};
-			RegisterClassEx(ref wndClass);
-			return CreateWindowEx(0, "SystemTrayIconWindowClass" + Id.ToString(), Id.ToString(), 0, 0, 0, 0, 0, IntPtr.Zero, IntPtr.Zero, wndClass.hInstance, IntPtr.Zero);
-		}
+				WNDCLASSEXW wndClass;
 
-		private IntPtr LoadIcon(string Icon)
-		{
-			string iconPath = Path.Combine(AppContext.BaseDirectory, Icon);
-			return LoadImage(IntPtr.Zero, iconPath, 1, 0, 0, 0x00000010 | 0x00000020);
-		}
+				wndClass.cbSize = (uint)sizeof(WNDCLASSEXW);
+				wndClass.style = 0;
+				wndClass.lpfnWndProc = &TrayIcon.WndProc;
+				wndClass.hInstance = GetModuleHandle(null);
+				wndClass.hIcon = LoadIcon(Icon);
+				wndClass.hCursor = GetCursor();
+				wndClass.lpszClassName = lpszClassName;
 
-		private IntPtr LoadCursor() => Helpers.Win32.LoadCursor(IntPtr.Zero, "#32512");
-
-		private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
-		{
-			if (msg == 0x8000 + Id)
-			{
-				if (lParam.ToInt32() == WM_LBUTTONDOWN)
-				{
-					LeftClicked?.Invoke(this, EventArgs.Empty);
-				}
-				else if (lParam.ToInt32() == WM_RBUTTONDOWN)
-				{
-					RightClicked?.Invoke(this, EventArgs.Empty);
-				}
+				RegisterClassEx(&wndClass);
+				return CreateWindowEx(0, lpszClassName, lpWindowName, 0, 0, 0, 0, 0, HWND.NULL, HMENU.NULL, wndClass.hInstance, null);
 			}
+		}
 
-			return DefWindowProc(hWnd, msg, wParam, lParam);
+		private unsafe HCURSOR LoadIcon(string Icon)
+		{
+			fixed (char* iconPath = Path.Combine(AppContext.BaseDirectory, Icon))
+			{
+				return (HCURSOR)LoadImage(HINSTANCE.NULL, iconPath, 1, 0, 0, 0x00000010 | 0x00000020);
+			}
+		}
+
+		private unsafe HCURSOR GetCursor()
+		{
+			fixed (char* cursor = "#32512")
+			{
+				return LoadCursor(HINSTANCE.NULL, cursor);
+			}
+		}
+
+		private unsafe NOTIFYICONDATAW._szTip_e__FixedBuffer GetSzTip(string toolTip)
+		{
+			// Create a char array of length 128, padding with '\0' if necessary
+			char[] szTip = toolTip.PadRight(128, '\0').ToCharArray();
+
+			// Create the fixed buffer and copy the values from the char array
+			NOTIFYICONDATAW._szTip_e__FixedBuffer result = new NOTIFYICONDATAW._szTip_e__FixedBuffer();
+
+			for (int i = 0; i < 128; i++)
+				result[i] = szTip[i];
+
+			return result;
 		}
 	}
 }

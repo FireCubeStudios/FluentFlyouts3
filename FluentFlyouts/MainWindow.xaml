@@ -91,9 +91,12 @@
                             <TextBlock Opacity="0.7" FontSize="14" Margin="2, 4, 4, 0"> - Preview 4</TextBlock>
                         </StackPanel>
                         <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
-                        <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                         <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join Fluent Flyouts Discord</HyperlinkButton>
-                        <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/FluentFlyouts3">GitHub repository</HyperlinkButton>
+                        <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/FluentFlyouts3">Star the GitHub repository</HyperlinkButton>
+                        <MenuFlyoutSeparator Margin="0, 0, 24, 0"/>
+                        <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/QrXJWJtKhv">Join Windows Hub</HyperlinkButton>
+                        <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/29jnjCrcsn">Join Fluent Design Hub</HyperlinkButton>
+                        <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                         <Button Click="Exit_Click" Margin="4,12,4,8" Width="150">Exit</Button>
                     </StackPanel>
                 </Grid>

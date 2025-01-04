@@ -1,4 +1,6 @@
+using FluentFlyouts.Core.Interfaces;
 using FluentFlyouts.Flyouts.Helpers;
+using FluentFlyouts.Flyouts.Interfaces;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -25,22 +27,24 @@ namespace FluentFlyouts.Flyouts
 	/// <summary>
 	/// An empty window that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public sealed partial class TrayFlyoutWindow : WindowEx
+	public sealed partial class TrayFlyoutWindow : WindowEx, IFlyoutWindow
 	{
 		private TrayIcon TrayIcon;
+		private IFlyoutContent FlyoutContent;
 
 		public MenuFlyout? ContextFlyout;
-		public TrayFlyoutWindow(TrayIcon trayIcon, UIElement flyoutContent, MenuFlyout contextFlyout = null)
+		public TrayFlyoutWindow(TrayIcon TrayIcon, IFlyoutContent FlyoutContent, MenuFlyout contextFlyout = null)
 		{
 			this.InitializeComponent();
 			this.SetExtendedWindowStyle(ExtendedWindowStyle.Transparent);
 			this.SetWindowOpacity(0);
 			this.ExtendsContentIntoTitleBar = true;
 
-			this.TrayIcon = trayIcon;
+			this.FlyoutContent = FlyoutContent;
+			this.TrayIcon = TrayIcon;
 			TrayIcon.LeftClicked += (sender, e) => ShowFlyout();
 
-			this.Flyout.Content = flyoutContent;
+			this.Flyout.Content = FlyoutContent as UIElement;
 
 			if (contextFlyout is not null)
 			{
@@ -81,5 +85,12 @@ namespace FluentFlyouts.Flyouts
 		}
 
 		private void Flyout_Closed(object sender, object e) => this.Hide();
+
+		public void Dispose()
+		{
+			FlyoutContent.Dispose();
+			TrayIcon.Dispose();
+			this.Close();
+		}
 	}
 }

@@ -1,4 +1,5 @@
 using CommunityToolkit.WinUI.UI.Helpers;
+using FluentFlyouts.Core.Interfaces;
 using FluentFlyouts.Flyouts;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -24,7 +25,7 @@ using Windows.UI.ViewManagement;
 
 namespace FluentFlyouts.Calendar.Flyouts
 {
-	public sealed partial class ClockFlyout : UserControl
+	public sealed partial class ClockFlyout : UserControl, IFlyoutContent
 	{
 		private DispatcherTimer? timer;
 
@@ -37,6 +38,7 @@ namespace FluentFlyouts.Calendar.Flyouts
 			StartTimer();
 
 			var uiSettings = new UISettings();
+			trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Calendar/Assets/ClockDark.ico" : "Calendar/Assets/ClockLight.ico")}");
 			uiSettings.ColorValuesChanged += (sender, e) =>{
 				trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Calendar/Assets/ClockDark.ico" : "Calendar/Assets/ClockLight.ico")}");
 			};
@@ -85,9 +87,11 @@ namespace FluentFlyouts.Calendar.Flyouts
 			// Update DayText to "Saturday" format (day of the week)
 			DayText.Text = now.ToString("dddd", CultureInfo.InvariantCulture);
 
-			///trayIcon.UpdateTooltip($"{now.ToString("dddd, MMMM d yyyy")}\n{now.ToString((is24HourClock ? "HH:mm" : "h:mm tt"))}");
+			trayIcon?.UpdateTooltip($"{now.ToString("dddd, MMMM d yyyy")}\n{now.ToString((is24HourClock ? "HH:mm" : "h:mm tt"))}");
 		}
 
 		private async void WindowsSettingsButton_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
+
+		public void Dispose() => timer?.Stop();
 	}
 }

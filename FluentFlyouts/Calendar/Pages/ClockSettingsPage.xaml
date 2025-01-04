@@ -30,7 +30,7 @@
                     <settings:SettingsBlockControl.Icon>
                         <icons:SymbolIcon Symbol="Clock" FontSize="24"/>
                     </settings:SettingsBlockControl.Icon>
-                    <ToggleSwitch Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
+                    <ToggleSwitch x:Name="ActiveSwitch" Toggled="ToggleSwitch_Toggled" Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
                 </settings:SettingsBlockControl>
             </StackPanel>
         </Grid>

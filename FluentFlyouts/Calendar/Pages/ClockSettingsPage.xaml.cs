@@ -1,3 +1,5 @@
+using FluentFlyouts.Calendar.Flyouts;
+using FluentFlyouts.Flyouts;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,6 +28,20 @@ namespace FluentFlyouts.Calendar.Pages
 		public ClockSettingsPage()
 		{
 			this.InitializeComponent();
+			ActiveSwitch.IsOn = App.flyoutService.HasFlyout(2);
+		}
+
+		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			if(ActiveSwitch.IsOn && !App.flyoutService.HasFlyout(2))
+			{
+				var tray = new TrayIcon(2, "", "");
+				App.flyoutService.AddFlyout(2, tray, new ClockFlyout(tray));
+			}
+			else
+			{
+				App.flyoutService.RemoveFlyout(2);
+			}
 		}
 	}
 }
