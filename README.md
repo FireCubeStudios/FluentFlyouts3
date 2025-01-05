@@ -16,7 +16,7 @@
   </picture></a>
 </p>
 
-<h4 align="center">Fluent Flyouts for Windows.</h3>
+<h2 align="center">Fluent Flyouts for Windows.</h2>
 
 Introducing **Fluent Flyouts**, a collection of modern flyouts for Windows. Built using WinUI 3 and enhanced using GlowUI, it leverages powerful technologies paired with beautiful design that makes using the app worthwhile.
 
