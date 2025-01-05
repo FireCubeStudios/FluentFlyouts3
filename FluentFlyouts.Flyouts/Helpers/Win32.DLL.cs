@@ -58,5 +58,11 @@ namespace FluentFlyouts.Flyouts.Helpers
 
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto)]
 		public static extern IntPtr GetModuleHandle(string? lpModuleName);
+
+		[DllImport("user32.dll")]
+		private static extern IntPtr MonitorFromPoint(POINT pt, uint dwFlags);
+
+		[DllImport("user32.dll")]
+		private static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO lpmi);
 	}
 }

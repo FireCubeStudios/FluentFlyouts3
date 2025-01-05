@@ -5,18 +5,19 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="207afa1d-5a9b-42a1-b90b-d87b03e2c0be"
-    Publisher="CN=FireCube"
-    Version="1.0.0.0" />
+    Name="2505FireCubeStudios.5031E5E896C8"
+    Publisher="CN=3C7C8FC9-7104-4B33-8730-EE1E929D5D3B"
+    Version="4.0.9.0" />
 
   <mp:PhoneIdentity PhoneProductId="207afa1d-5a9b-42a1-b90b-d87b03e2c0be" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>FluentFlyouts</DisplayName>
-    <PublisherDisplayName>FireCube</PublisherDisplayName>
+    <DisplayName>Fluent Flyouts</DisplayName>
+    <PublisherDisplayName>FireCubeStudios</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -33,9 +34,17 @@
     <Application Id="App"
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
+      <Extensions>
+        <uap5:Extension Category="windows.startupTask">
+          <uap5:StartupTask
+            TaskId="FluentFlyoutsStartupTaskId"
+            DisplayName="Fluent Flyouts"
+            Enabled="true"/>
+        </uap5:Extension>
+      </Extensions>
       <uap:VisualElements
-        DisplayName="FluentFlyouts"
-        Description="FluentFlyouts"
+        DisplayName="Fluent Flyouts"
+        Description="Fluent Flyouts v4"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

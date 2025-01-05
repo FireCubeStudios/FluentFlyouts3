@@ -20,12 +20,12 @@
                     <RotateTransform x:Name="SecondsTransform" Angle="0"/>
                 </Rectangle.RenderTransform>
             </Rectangle>-->
-            <Rectangle Fill="{ThemeResource ResponsiveAccentBrush3}" Opacity="0.8" Width="55" Height="4" RadiusX="4" RadiusY="4" RenderTransformOrigin="0.1, 0.5">
+            <Rectangle Fill="{ThemeResource ResponsiveAccentBrush3}" Opacity="0.8" Width="55" Height="4" RadiusX="2" RadiusY="2" RenderTransformOrigin="0.1, 0.5">
                 <Rectangle.RenderTransform>
                     <RotateTransform x:Name="MinutesTransform" Angle="0"/>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Rectangle Fill="{ThemeResource ResponsiveAccentBrush3}" Opacity="0.7" Width="45" Height="4" RadiusX="4" RadiusY="4" RenderTransformOrigin="0.1, 0.5">
+            <Rectangle Fill="{ThemeResource ResponsiveAccentBrush3}" Opacity="0.7" Width="45" Height="4" RadiusX="2" RadiusY="2" RenderTransformOrigin="0.1, 0.5">
                 <Rectangle.RenderTransform>
                     <RotateTransform  x:Name="HoursTransform" Angle="0"/>
                 </Rectangle.RenderTransform>

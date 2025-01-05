@@ -28,6 +28,7 @@ namespace FluentFlyouts.Calendar.Flyouts
 	public sealed partial class ClockFlyout : UserControl, IFlyoutContent
 	{
 		private DispatcherTimer? timer;
+		private DispatcherTimer? timerDay;
 
 		private TrayIcon? trayIcon;
 		public ClockFlyout(TrayIcon trayIcon)
@@ -38,9 +39,9 @@ namespace FluentFlyouts.Calendar.Flyouts
 			StartTimer();
 
 			var uiSettings = new UISettings();
-			trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Calendar/Assets/ClockDark.ico" : "Calendar/Assets/ClockLight.ico")}");
+			trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Clock/Assets/ClockDark.ico" : "Clock/Assets/ClockLight.ico")}");
 			uiSettings.ColorValuesChanged += (sender, e) =>{
-				trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Calendar/Assets/ClockDark.ico" : "Calendar/Assets/ClockLight.ico")}");
+				trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Clock/Assets/ClockDark.ico" : "Clock/Assets/ClockLight.ico")}");
 			};
 		}
 
@@ -67,8 +68,6 @@ namespace FluentFlyouts.Calendar.Flyouts
 			// Get current date and time
 			DateTime now = DateTime.Now;
 
-			Calendar.SetDisplayDate(now);
-
 			bool is24HourClock = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern.Contains("H");
 
 			// Update DatesText to "4 January 2025" format
@@ -91,6 +90,13 @@ namespace FluentFlyouts.Calendar.Flyouts
 		}
 
 		private async void WindowsSettingsButton_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
+
+		private void Calendar_Loaded(object sender, RoutedEventArgs e)
+		{
+			DateTime now = DateTime.Now;
+
+			Calendar.SetDisplayDate(now);
+		}
 
 		public void Dispose() => timer?.Stop();
 	}

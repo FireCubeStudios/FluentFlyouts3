@@ -55,19 +55,21 @@ namespace FluentFlyouts.Flyouts
 				contextFlyout.Placement = FlyoutPlacementMode.Top;
 				contextFlyout.ShouldConstrainToRootBounds = false;
 			}
-
-		//	this.Content.LostFocus += (sender, e) => this.Hide();
 		}
 
 		public void ShowFlyout()
 		{
 			this.Activate();
-			this.MoveAndResize((double)Win32.GetCursorPosition().X, (double)Win32.GetCursorPosition().Y, 0, 0);
+			var cursor = Win32.GetCursorPosition();
+			this.MoveAndResize((double)cursor.X, (double)cursor.Y, 0, 0);
 			FlyoutShowOptions options = new FlyoutShowOptions();
-			options.Position = new Point(0, 0);
+			options.Placement = FlyoutPlacementMode.TopEdgeAlignedLeft;
+			options.Position = new Point(cursor.X, cursor.Y);
+			Win32.SetForegroundWindow(this.GetWindowHandle());
+
+
 			this.Flyout.ShowAt(this.FlyoutContainer, options);
 			//FlyoutBase.ShowAttachedFlyout(Container);
-			Win32.SetForegroundWindow(this.GetWindowHandle());
 		}
 
 		public void ShowMenuFlyout()

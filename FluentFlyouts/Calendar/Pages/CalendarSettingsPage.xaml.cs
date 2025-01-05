@@ -1,5 +1,4 @@
 using FluentFlyouts.Calendar.Flyouts;
-using FluentFlyouts.Flyouts;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,24 +22,24 @@ namespace FluentFlyouts.Calendar.Pages
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public sealed partial class ClockSettingsPage : Page
+	public sealed partial class CalendarSettingsPage : Page
 	{
-		public ClockSettingsPage()
+		public CalendarSettingsPage()
 		{
 			this.InitializeComponent();
-			ActiveSwitch.IsOn = App.flyoutService.HasFlyout(2);
+			ActiveSwitch.IsOn = App.Settings.IsCalendarFlyoutEnabled;
 		}
 
 		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
-			if(ActiveSwitch.IsOn && !App.flyoutService.HasFlyout(2))
+			App.Settings.IsCalendarFlyoutEnabled = ActiveSwitch.IsOn;
+			if (ActiveSwitch.IsOn && !App.flyoutService.HasFlyout(3))
 			{
-				var tray = new TrayIcon(2, "", "");
-				App.flyoutService.AddFlyout(2, tray, new ClockFlyout(tray));
+				App.flyoutService.AddFlyout(3, tray => new CalendarFlyout(tray));
 			}
-			else
+			else if (!ActiveSwitch.IsOn && App.flyoutService.HasFlyout(3))
 			{
-				App.flyoutService.RemoveFlyout(2);
+				App.flyoutService.RemoveFlyout(3);
 			}
 		}
 	}

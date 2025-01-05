@@ -1,3 +1,6 @@
+using FluentFlyouts.Core.Interfaces;
+using FluentFlyouts.Flyouts;
+using FluentFlyouts.News.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -7,6 +10,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -16,27 +20,29 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace FluentFlyouts.Flyouts
+namespace FluentFlyouts.News.Flyouts
 {
-	public sealed partial class VolumeFlyout : UserControl
+	public sealed partial class NewsFlyout : UserControl, IFlyoutContent
 	{
+		public ObservableCollection<object> Cards { get; } = new ObservableCollection<object>();
 		private TrayIcon trayIcon;
-		public VolumeFlyout(TrayIcon trayIcon)
+		public NewsFlyout(TrayIcon trayIcon)
 		{
 			this.InitializeComponent();
 			this.trayIcon = trayIcon;
 		}
 
-		private string VolumeToString(double value) => $"{((int)value)}";
-
-		private async void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+		private async void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-
+			foreach (var card in Card.ProcessCards((await FluentFlyouts.News.Helpers.Api.GetFeed()).Cards))
+			{
+				Cards.Add(card);
+			}
 		}
 
-		private void MuteButton_Click(object sender, RoutedEventArgs e)
+		public void Dispose()
 		{
-
+			throw new NotImplementedException();
 		}
 	}
 }

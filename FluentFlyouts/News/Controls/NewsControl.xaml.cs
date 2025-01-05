@@ -1,16 +1,14 @@
-using FluentFlyouts.Core.Battery.ViewModels;
-using FluentFlyouts.Core.Interfaces;
-using FluentFlyouts.Flyouts;
+using FluentFlyouts.News.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,21 +18,22 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace FluentFlyouts.Battery.Flyouts
+namespace FluentFlyouts.News.Controls
 {
-	public sealed partial class BatteryFlyout : UserControl, IFlyoutContent
+	public sealed partial class NewsControl : UserControl
 	{
-		private BatteryFlyoutViewModel ViewModel = new();
-		private TrayIcon trayIcon;
-
-		public BatteryFlyout(TrayIcon trayIcon)
+		public ObservableCollection<object> Cards { get; } = new ObservableCollection<object>();
+		public NewsControl()
 		{
 			this.InitializeComponent();
-			this.trayIcon = trayIcon;
 		}
 
-		public void Dispose()
+		private async void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
+			foreach (var card in Card.ProcessCards((await FluentFlyouts.News.Helpers.Api.GetFeed()).Cards))
+			{
+				Cards.Add(card);
+			}
 		}
 	}
 }

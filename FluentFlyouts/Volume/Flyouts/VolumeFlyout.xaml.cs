@@ -1,11 +1,8 @@
-using FluentFlyouts.Core.Battery.ViewModels;
-using FluentFlyouts.Core.Interfaces;
 using FluentFlyouts.Flyouts;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -20,21 +17,27 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace FluentFlyouts.Battery.Flyouts
+namespace FluentFlyouts.Volume.Flyouts
 {
-	public sealed partial class BatteryFlyout : UserControl, IFlyoutContent
+	public sealed partial class VolumeFlyout : UserControl
 	{
-		private BatteryFlyoutViewModel ViewModel = new();
 		private TrayIcon trayIcon;
-
-		public BatteryFlyout(TrayIcon trayIcon)
+		public VolumeFlyout(TrayIcon trayIcon)
 		{
 			this.InitializeComponent();
 			this.trayIcon = trayIcon;
 		}
 
-		public void Dispose()
+		private string VolumeToString(double value) => $"{((int)value)}";
+
+		private async void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
 		{
+
+		}
+
+		private void MuteButton_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

@@ -14,14 +14,14 @@
             <RowDefinition Height="36"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="290"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock x:Name="DatesText" Text="04 January 2025" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="DatesText" Text="04 January 2025" FontSize="24" Typography.NumeralAlignment="2" FontStretch="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" RowSpacing="4">
-            <CalendarView x:Name="Calendar" Margin="-12, -16, -12, -16" Background="Transparent" BorderThickness="0" CornerRadius="8, 8, 0, 0" RenderTransformOrigin="0.5, 0.5">
+            <CalendarView x:Name="Calendar" Loaded="Calendar_Loaded" Margin="-12, -16, -12, -16" Background="Transparent" BorderThickness="0" CornerRadius="8, 8, 0, 0" RenderTransformOrigin="0.5, 0.5">
                 <CalendarView.RenderTransform>
                     <ScaleTransform ScaleX="0.85" ScaleY="0.85"/>
                 </CalendarView.RenderTransform>

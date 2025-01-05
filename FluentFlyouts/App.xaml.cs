@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using CommunityToolkit.WinUI.Helpers;
+using FluentFlyouts.Battery.Flyouts;
 using FluentFlyouts.Calendar.Flyouts;
+using FluentFlyouts.Copilot.Flyouts;
+using FluentFlyouts.Devices.Flyouts;
 using FluentFlyouts.Flyouts;
+using FluentFlyouts.Network.Flyouts;
+using FluentFlyouts.Notifications.Flyouts;
 using FluentFlyouts.Services;
 using Microsoft.UI.Xaml;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
@@ -22,28 +31,68 @@ namespace FluentFlyouts
     /// </summary>
     public partial class App : Application
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App()
+		private const string MutexID = "FluentFlyoutsMutex";
+		private static Mutex? SingleInstanceMutex;
+
+		/// <summary>
+		/// Initializes the singleton application object.  This is the first line of authored code
+		/// executed, and as such is the logical equivalent of main() or WinMain().
+		/// </summary>
+		public App()
         {
             this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
-		{
-			App.m_window ??= new MainWindow();
-			App.m_window.Activate();
-
-			var tray = new TrayIcon(2, "", "");
-			App.flyoutService.AddFlyout(2, tray, new ClockFlyout(tray));
+			CheckSingleInstance();
 		}
 
+		private void CheckSingleInstance()
+		{
+			bool isNewInstance;
+			SingleInstanceMutex = new Mutex(true, MutexID, out isNewInstance);
+			if (!isNewInstance)
+				System.Environment.Exit(0);
+		}
+
+		/// <summary>
+		/// Invoked when the application is launched.
+		/// </summary>
+		/// <param name="args">Details about the launch request and process.</param>
+		protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+		{
+			// App was not launched automatically from a StartupTask
+			if (AppInstance.GetActivatedEventArgs().Kind != ActivationKind.StartupTask)
+			{
+				if (Settings.IsFirstRun)
+					OpenSettings();
+
+				Settings.IsFirstRun = true;
+			}
+
+			if (Settings.IsClockFlyoutEnabled)
+			{
+				App.flyoutService.AddFlyout(2, tray => new ClockFlyout(tray));
+			}
+			if (Settings.IsCalendarFlyoutEnabled)
+			{
+				App.flyoutService.AddFlyout(3, tray => new CalendarFlyout(tray));
+			}
+		}
+
+        public static void OpenSettings()
+        {
+			App.m_window ??= new MainWindow();
+			App.m_window.Activate();
+			App.m_window.Closed += (sender, e) => App.m_window = new MainWindow();
+		}
+
+		public static void Close()
+		{
+			flyoutService.ClearAllFlyouts();
+			m_window?.Close();
+			CoreApplication.Exit();
+			System.Environment.Exit(0);
+		}
+
+		public static SettingsService Settings = new();
         public static TrayFlyoutService flyoutService = new();
 		public static Window? m_window;
 	}

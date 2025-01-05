@@ -14,7 +14,7 @@
     IsShownInSwitchers="False">
     <Grid>
         <ContentControl x:Name="FlyoutContainer">
-            <Flyout x:Name="Flyout" Closed="Flyout_Closed" Placement="Top" ShouldConstrainToRootBounds="False">
+            <Flyout x:Name="Flyout" Closed="Flyout_Closed" Placement="Top" LightDismissOverlayMode="On" ShouldConstrainToRootBounds="False">
                 <Flyout.SystemBackdrop>
                     <MicaBackdrop/>
                 </Flyout.SystemBackdrop>
@@ -25,8 +25,8 @@
                         <Setter Property="Background" Value="Transparent" />
                         <Setter Property="BorderThickness" Value="0" />
                         <Setter Property="CornerRadius" Value="8" />
-                        <Setter Property="MaxWidth" Value="1000" />
-                        <Setter Property="MaxHeight" Value="1000" />
+                        <Setter Property="MaxWidth" Value="10000" />
+                        <Setter Property="MaxHeight" Value="10000" />
                         <Setter Property="IsDefaultShadowEnabled" Value="True"/>
                     </Style>
                 </Flyout.FlyoutPresenterStyle>

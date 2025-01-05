@@ -63,5 +63,39 @@ namespace FluentFlyouts.Flyouts.Helpers
 		}
 
 		public delegate IntPtr WndProcDelegate(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+
+		public static RECT GetScreenBounds(int x, int y)
+		{
+			POINT pt = new POINT { X = x, Y = y };
+			IntPtr hMonitor = MonitorFromPoint(pt, MONITOR_DEFAULTTONEAREST);
+
+			MONITORINFO monitorInfo = new MONITORINFO();
+			monitorInfo.cbSize = (uint)Marshal.SizeOf(monitorInfo);
+
+			if (GetMonitorInfo(hMonitor, ref monitorInfo))
+			{
+				return monitorInfo.rcWork; // rcWork excludes taskbar; rcMonitor includes it
+			}
+
+			return new RECT { Left = 0, Top = 0, Right = 1920, Bottom = 1080 }; // Default fallback
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct MONITORINFO
+		{
+			public uint cbSize;
+			public RECT rcMonitor;
+			public RECT rcWork;
+			public uint dwFlags;
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct RECT
+		{
+			public int Left;
+			public int Top;
+			public int Right;
+			public int Bottom;
+		}
 	}
 }

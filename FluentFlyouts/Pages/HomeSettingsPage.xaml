@@ -26,8 +26,27 @@
                     <settings:SettingsBlockControl.Icon>
                         <icons:SymbolIcon Symbol="ClockAlarm" FontSize="24"/>
                     </settings:SettingsBlockControl.Icon>
-                    <ToggleSwitch Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
+                    <ToggleSwitch x:Name="StartupToggle" Toggled="StartupToggle_Toggled" Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
                 </settings:SettingsBlockControl>
+                <TextBlock x:Name="StartupErrorText" Text="" TextWrapping="WrapWholeWords" Foreground="{ThemeResource RedLinearGradientBrush}"/>
+
+                <StackPanel Margin="0, 100, 12, 0" Spacing="4">
+                    <TextBlock Text="Welcome to Fluent Flyouts v4 preview" FontSize="16" FontWeight="SemiBold"/>
+                    <TextBlock Text="We are working hard on making this the best version of Fluent Flyouts yet! This app is still in preview so not all features are available. Please send all feedback on GitHub and consider starring the repository to support the project!" Opacity="0.7" TextWrapping="WrapWholeWords"/>
+                    <TextBlock>
+                        <Bold>Upcoming features:</Bold>
+                        <LineBreak/>
+                        • Porting battery Flyout
+                        <LineBreak/>
+                        • Calendar customisation
+                        <LineBreak/>
+                        • Calendar events
+                        <LineBreak/>
+                        • Unrounded, Connected flyouts
+                        <LineBreak/>
+                        • Lot of other flyouts
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

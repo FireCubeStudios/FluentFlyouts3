@@ -40,5 +40,7 @@ namespace FluentFlyouts.Flyouts.Helpers
 		public const int SWP_NOACTIVATE = 0x0010;
 		public const int SWP_NOMOVE = 0x0002;
 		public const int SWP_NOSIZE = 0x0001;
+
+		private const uint MONITOR_DEFAULTTONEAREST = 2;
 	}
 }

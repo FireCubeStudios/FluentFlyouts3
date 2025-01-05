@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using WinUIEx;
@@ -34,7 +35,7 @@ namespace FluentFlyouts
             SettingsNavigation.SelectedItem = SettingsNavigation.MenuItems[0];
         }
 
-		private void Exit_Click(object sender, RoutedEventArgs e) => Application.Current.Exit();
+        private void Exit_Click(object sender, RoutedEventArgs e) => App.Close();
 
 		private void SettingsNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
 		{
@@ -42,6 +43,15 @@ namespace FluentFlyouts
           
             if(args.SelectedItem == sender.MenuItems[0]) SettingsFrame.Navigate(typeof(HomeSettingsPage));
 			else if(args.SelectedItem == sender.MenuItems[2]) SettingsFrame.Navigate(typeof(ClockSettingsPage));
+			else if (args.SelectedItem == sender.MenuItems[3]) SettingsFrame.Navigate(typeof(CalendarSettingsPage));
+		}
+
+        // Exit the program if no flyouts are open and settings window is closed
+        // This is done because app is single instanced
+		private void WindowEx_Closed(object sender, WindowEventArgs args)
+		{
+            if(App.flyoutService.Flyouts.Count == 0)
+                App.Close();
 		}
 	}
 }

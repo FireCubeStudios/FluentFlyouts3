@@ -18,16 +18,27 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Generated Files\**" />
+	  <Compile Remove="News\**" />
 	  <EmbeddedResource Remove="Generated Files\**" />
+	  <EmbeddedResource Remove="News\**" />
 	  <None Remove="Generated Files\**" />
+	  <None Remove="News\**" />
 	  <Page Remove="Generated Files\**" />
+	  <Page Remove="News\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="Calendar\Controls\ClockControl.xaml" />
+		<None Remove="Calendar\Pages\CalendarSettingsPage.xaml" />
+		<None Remove="Clock\Controls\ClockControl.xaml" />
+		<None Remove="Calendar\Flyouts\CalendarFlyout.xaml" />
 		<None Remove="Calendar\Pages\ClockSettingsPage.xaml" />
-		<None Remove="Flyouts\BatteryFlyout.xaml" />
-		<None Remove="Flyouts\ClockFlyout.xaml" />
-		<None Remove="Flyouts\VolumeFlyout.xaml" />
+		<None Remove="Copilot\Flyouts\CopilotFlyout.xaml" />
+		<None Remove="Devices\Flyouts\DeviceFlyout.xaml" />
+		<None Remove="Network\Controls\NetworkListControl.xaml" />
+		<None Remove="Network\Flyouts\NetworkFlyout.xaml" />
+		<None Remove="Notifications\Flyouts\NotificationFlyout.xaml" />
+		<None Remove="Volume\Flyouts\BatteryFlyout.xaml" />
+		<None Remove="Volume\Flyouts\ClockFlyout.xaml" />
+		<None Remove="Volume\Flyouts\VolumeFlyout.xaml" />
 		<None Remove="Pages\HomeSettingsPage.xaml" />
 	</ItemGroup>
 
@@ -54,9 +65,12 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.241112-preview1" />
+		<PackageReference Include="Flurl.Http" Version="4.0.2" />
 		<PackageReference Include="Microsoft.Windows.CSWinRT" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="PowerStatus" Version="1.0.3" />
 	</ItemGroup>
 	<ItemGroup>
@@ -65,23 +79,11 @@
 		<ProjectReference Include="..\FluentFlyouts.Flyouts\FluentFlyouts.Flyouts.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Page Update="Flyouts\VolumeFlyout.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </Page>
-	</ItemGroup>
-	<ItemGroup>
-		<Page Update="Flyouts\ClockFlyout.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</Page>
-	</ItemGroup>
-	<ItemGroup>
-		<Page Update="Flyouts\BatteryFlyout.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</Page>
-	</ItemGroup>
-	<ItemGroup>
 	  <Folder Include="Battery\Flyouts\" />
-	  <Folder Include="Calendar\Assets\" />
+	  <Folder Include="Clock\Assets\" />
+	  <Folder Include="Clock\Flyouts\" />
+	  <Folder Include="Clock\Pages\" />
+	  <Folder Include="Volume\" />
 	</ItemGroup>
 
 	<!--
@@ -100,7 +102,7 @@
 		<PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
 		<PublishTrimmed Condition="'$(Configuration)' != 'Debug'">False</PublishTrimmed>
 		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-		<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<AppxPackageDir>D:\Source\repos\FluentFlyouts3\FluentFlyouts\AppPackages\</AppxPackageDir>
@@ -108,6 +110,8 @@
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
 		<AppxBundle>Never</AppxBundle>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+		<PackageCertificateKeyFile>FluentFlyouts_TemporaryKey.pfx</PackageCertificateKeyFile>
+		<AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
 		<Optimize>True</Optimize>
@@ -122,20 +126,47 @@
 	  <PRIResource Remove="Generated Files\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Update="Calendar\Assets\ClockDark.ico">
+	  <Page Update="Calendar\Pages\CalendarSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <None Update="Calendar\Assets\CalendarDark.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Calendar\Assets\ClockLight.ico">
+	  <None Update="Calendar\Assets\CalendarLight.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Clock\Assets\ClockDark.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Clock\Assets\ClockLight.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <Page Update="Network\Controls\NetworkListControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Network\Flyouts\NetworkFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Devices\Flyouts\DeviceFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Notifications\Flyouts\NotificationFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Calendar\Flyouts\CalendarFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Copilot\Flyouts\CopilotFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	  <Page Update="Pages\HomeSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	  <Page Update="Calendar\Pages\ClockSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
-	  <Page Update="Calendar\Controls\ClockControl.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <PRIResource Remove="News\**" />
 	</ItemGroup>
 </Project>

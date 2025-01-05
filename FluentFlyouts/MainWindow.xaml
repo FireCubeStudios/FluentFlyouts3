@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winuiex="using:WinUIEx" xmlns:icons="using:FluentIcons.WinUI"
+    Closed="WindowEx_Closed"
     mc:Ignorable="d"
     MinWidth="1200"
     MinHeight="400"
@@ -62,14 +63,14 @@
                         <icons:SymbolIcon Symbol="Clock"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Battery">
-                    <NavigationViewItem.Icon>
-                        <icons:SymbolIcon Symbol="Battery4"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
                 <NavigationViewItem Content="Calendar">
                     <NavigationViewItem.Icon>
                         <icons:SymbolIcon Symbol="Calendar"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Battery" Visibility="Collapsed">
+                    <NavigationViewItem.Icon>
+                        <icons:SymbolIcon Symbol="Battery4"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -94,7 +95,7 @@
                         <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join Fluent Flyouts Discord</HyperlinkButton>
                         <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/FluentFlyouts3">Star the GitHub repository</HyperlinkButton>
                         <MenuFlyoutSeparator Margin="0, 0, 24, 0"/>
-                        <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/QrXJWJtKhv">Join Windows Hub</HyperlinkButton>
+                        <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/JDy6sB2DYT">Join Personalisation Hub</HyperlinkButton>
                         <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/29jnjCrcsn">Join Fluent Design Hub</HyperlinkButton>
                         <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                         <Button Click="Exit_Click" Margin="4,12,4,8" Width="150">Exit</Button>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="FluentFlyouts.Calendar.Pages.CalendarSettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentFlyouts.Calendar.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:flyouts="using:FluentFlyouts.Calendar.Flyouts" xmlns:settings="using:CubeKit.UI.Controls.Settings" xmlns:icons="using:FluentIcons.WinUI"
+    mc:Ignorable="d">
+
+    <Grid Padding="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Text="Calendar Flyout" FontSize="24" FontWeight="SemiBold"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Background="{ThemeResource MicaBrush}" HorizontalAlignment="Center" RenderTransformOrigin="0.5, 0.5">
+            <Grid.RenderTransform>
+                <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+            </Grid.RenderTransform>
+            <flyouts:CalendarFlyout/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+            <StackPanel>
+                <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 40, 4, 4">Calendar personalization</TextBlock>
+                <settings:SettingsBlockControl Title="Calendar flyout" Margin="2" Description="Enable the calendar flyout in taskbar">
+                    <settings:SettingsBlockControl.Icon>
+                        <icons:SymbolIcon Symbol="Calendar" FontSize="24"/>
+                    </settings:SettingsBlockControl.Icon>
+                    <ToggleSwitch x:Name="ActiveSwitch" Toggled="ToggleSwitch_Toggled" Style="{ThemeResource GlowSwitch}" OnContent="" HorizontalAlignment="Right" OffContent="" MinWidth="0" Width="60"/>
+                </settings:SettingsBlockControl>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

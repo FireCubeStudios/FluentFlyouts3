@@ -19,11 +19,40 @@ namespace FluentFlyouts.Services
 	 */
 	public class TrayFlyoutService
 	{
-		private MenuFlyout contextFlyout;
-		private Dictionary<int, IFlyoutWindow> Flyouts = new();
-		public TrayFlyoutService() 
+		public Dictionary<int, IFlyoutWindow> Flyouts = new();
+
+		public void AddFlyout(int Id, Func<TrayIcon, IFlyoutContent> flyoutFactory)
 		{
-			contextFlyout = new MenuFlyout();
+			if (!HasFlyout(Id))
+			{
+				var tray = new TrayIcon((uint)Id, "", "");
+				var flyoutContent = flyoutFactory(tray);
+				Flyouts.Add(Id, new TrayFlyoutWindow(tray, flyoutContent, GetContextFlyout()));
+			}
+		}
+
+
+		public bool HasFlyout(int Id) => Flyouts.ContainsKey(Id);
+
+		public void RemoveFlyout(int Id)
+		{
+			IFlyoutWindow? Flyout;
+			Flyouts.TryGetValue(Id, out Flyout);
+			Flyout?.Dispose();
+			Flyouts.Remove(Id);
+		}
+
+		public void ClearAllFlyouts()
+		{
+			foreach(var flyout in Flyouts.Values)
+				flyout.Dispose();
+			
+			Flyouts.Clear();
+		}
+
+		private MenuFlyout GetContextFlyout()
+		{
+			MenuFlyout contextFlyout = new MenuFlyout();
 			contextFlyout.Items.Add(new MenuFlyoutItem()
 			{
 				Icon = new FluentIcons.WinUI.SymbolIcon() { Symbol = FluentIcons.Common.Symbol.PersonFeedback },
@@ -44,25 +73,10 @@ namespace FluentFlyouts.Services
 			});
 			(contextFlyout.Items[3] as MenuFlyoutItem)!.Click += (sender, e) =>
 			{
-				App.m_window ??= new MainWindow();
-				App.m_window.Activate();
+				App.OpenSettings();
 			};
-		}
 
-		public void AddFlyout(int Id, TrayIcon Icon, IFlyoutContent FlyoutContent)
-		{
-			if(!HasFlyout(Id))
-				Flyouts.Add(Id, new TrayFlyoutWindow(Icon, FlyoutContent, contextFlyout));
-		}
-
-		public bool HasFlyout(int Id) => Flyouts.ContainsKey(Id);
-
-		public void RemoveFlyout(int Id)
-		{
-			IFlyoutWindow? Flyout;
-			Flyouts.TryGetValue(Id, out Flyout);
-			Flyout?.Dispose();
-			Flyouts.Remove(Id);
+			return contextFlyout;
 		}
 	}
 }
