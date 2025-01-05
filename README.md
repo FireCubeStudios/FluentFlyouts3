@@ -31,7 +31,7 @@ Want to contribute to this project? Let me know with an [issue](https://github.c
 
 ## ⚖️ License
 
-This project is licensed under the `MIT` license. See the `LICENSE.md` file for in the root directory for details.
+This project is licensed under the `MIT` license. See the `LICENSE` file for in the root directory for details.
 
 ## 😇 Acknowledgements
 
