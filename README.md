@@ -36,4 +36,5 @@ This project is licensed under the `MIT` license. See the `LICENSE` file for in 
 ## 😇 Acknowledgements
 
 We thank all contributors and users for their continued support.
+
 Special thanks to [callmemasfer](https://x.com/callmemasfer) for the icon design and XPnerd for recreating it
