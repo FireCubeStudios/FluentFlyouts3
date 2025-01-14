@@ -36,7 +36,7 @@ namespace FluentFlyouts.Calendar.Pages
 			App.Settings.IsClockFlyoutEnabled = ActiveSwitch.IsOn;
 			if (ActiveSwitch.IsOn && !App.flyoutService.HasFlyout(2))
 			{
-				App.flyoutService.AddFlyout(2, tray => new ClockFlyout(tray));
+				App.flyoutService.AddFlyout(2, tray => new ClockFlyout(tray), true);
 			}
 			else if (!ActiveSwitch.IsOn && App.flyoutService.HasFlyout(2))
 			{

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using FluentFlyouts.Calendar.Pages;
 using FluentFlyouts.Pages;
+using FluentFlyouts.Screen.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -44,6 +45,7 @@ namespace FluentFlyouts
             if(args.SelectedItem == sender.MenuItems[0]) SettingsFrame.Navigate(typeof(HomeSettingsPage));
 			else if(args.SelectedItem == sender.MenuItems[2]) SettingsFrame.Navigate(typeof(ClockSettingsPage));
 			else if (args.SelectedItem == sender.MenuItems[3]) SettingsFrame.Navigate(typeof(CalendarSettingsPage));
+			else if (args.SelectedItem == sender.MenuItems[5]) SettingsFrame.Navigate(typeof(BrightnessSettingsPage));
 		}
 
         // Exit the program if no flyouts are open and settings window is closed

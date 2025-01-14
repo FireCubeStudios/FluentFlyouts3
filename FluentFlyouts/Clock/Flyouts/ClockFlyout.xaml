@@ -15,19 +15,19 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock x:Name="DatesText" Text="04 January 2025" FontSize="24" Typography.NumeralAlignment="2" FontStretch="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" RowSpacing="4">
-            <CalendarView x:Name="Calendar" Loaded="Calendar_Loaded" Margin="-12, -16, -12, -16" Background="Transparent" BorderThickness="0" CornerRadius="8, 8, 0, 0" RenderTransformOrigin="0.5, 0.5">
+            <CalendarView x:Name="Calendar" IsTodayHighlighted="True" Loaded="Calendar_Loaded" Margin="-12, -16, -12, -16" Background="Transparent" BorderThickness="0" CornerRadius="8, 8, 0, 0" RenderTransformOrigin="0.5, 0.5">
                 <CalendarView.RenderTransform>
                     <ScaleTransform ScaleX="0.85" ScaleY="0.85"/>
                 </CalendarView.RenderTransform>
             </CalendarView>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1" RowSpacing="4" Padding="0, 20, 0, 0">
+        <Grid Grid.Row="1" Grid.Column="1" RowSpacing="4" Padding="-24, 20, 0, 0">
             <StackPanel Spacing="4" VerticalAlignment="Center">
                 <controls:ClockControl Width="150" Height="150"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -34,6 +34,29 @@ namespace FluentFlyouts.Services
 			}
 		}
 
+		private bool isBrightnessFlyoutEnabled = (bool)(Settings.Values["BrightnessFlyoutEnabled_Preview"] ?? true);
+		public bool IsBrightnessFlyoutEnabled
+		{
+			get => isBrightnessFlyoutEnabled;
+			set
+			{
+				Settings.Values["BrightnessFlyoutEnabled_Preview"] = value;
+				SetProperty(ref isBrightnessFlyoutEnabled, value);
+			}
+		}
+
+		// Show brightness flyout if brightness changes
+		private bool showBrightnessFlyoutWhenChanged = (bool)(Settings.Values["ShowBrightnessFlyoutWhenChanged_Preview"] ?? true);
+		public bool ShowBrightnessFlyoutWhenChanged
+		{
+			get => showBrightnessFlyoutWhenChanged;
+			set
+			{
+				Settings.Values["ShowBrightnessFlyoutWhenChanged_Preview"] = value;
+				SetProperty(ref showBrightnessFlyoutWhenChanged, value);
+			}
+		}
+
 		private bool isFirstRun = (bool)(Settings.Values["FirstRun_Preview"] ?? true);
 		public bool IsFirstRun
 		{

@@ -16,7 +16,7 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" Spacing="4">
                 <TextBlock Text="Fluent Flyouts" FontSize="24" FontWeight="SemiBold"/>
-                <TextBlock Text=" - v4 preview" FontSize="16" FontWeight="SemiBold" Opacity="0.7" VerticalAlignment="Bottom"/>
+                <TextBlock Text=" - v4.1 preview" FontSize="16" FontWeight="SemiBold" Opacity="0.7" VerticalAlignment="Bottom"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -37,6 +37,8 @@
                         <Bold>Upcoming features:</Bold>
                         <LineBreak/>
                         • Porting battery Flyout
+                        <LineBreak/>
+                        • Multi monitor support
                         <LineBreak/>
                         • Calendar customisation
                         <LineBreak/>

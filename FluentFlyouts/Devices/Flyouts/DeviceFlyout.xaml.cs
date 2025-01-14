@@ -24,6 +24,8 @@ namespace FluentFlyouts.Devices.Flyouts
 {
 	public sealed partial class DeviceFlyout : UserControl, IFlyoutContent
 	{
+		public event EventHandler? ShowFlyoutRequested;
+
 		private TrayIcon trayIcon;
 		public DeviceFlyout(TrayIcon trayIcon)
 		{

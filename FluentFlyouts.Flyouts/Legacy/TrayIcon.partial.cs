@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static FluentFlyouts.Flyouts.Helpers.Win32;
+using static FluentFlyouts.Flyouts.Win32.Win32;
 
 namespace FluentFlyouts.Flyouts
 {
@@ -36,7 +36,7 @@ namespace FluentFlyouts.Flyouts
 			return LoadImage(IntPtr.Zero, iconPath, 1, 0, 0, 0x00000010 | 0x00000020);
 		}
 
-		private IntPtr LoadCursor() => Helpers.Win32.LoadCursor(IntPtr.Zero, "#32512");
+		private IntPtr LoadCursor() => Win32.Win32.LoadCursor(IntPtr.Zero, "#32512");
 
 		private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
 		{

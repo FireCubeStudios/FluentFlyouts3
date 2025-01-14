@@ -73,6 +73,11 @@
                         <icons:SymbolIcon Symbol="Battery4"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="Brightness">
+                    <NavigationViewItem.Icon>
+                        <icons:SymbolIcon Symbol="BrightnessHigh"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <Grid>
                 <Grid.ColumnDefinitions>

@@ -10,6 +10,8 @@
     xmlns:icons="using:FluentIcons.WinUI"
     mc:Ignorable="d"
     IsAlwaysOnTop="True"
+    IsMaximizable="False"
+    IsMinimizable="False"
     IsResizable="False"
     IsShownInSwitchers="False">
     <Grid>

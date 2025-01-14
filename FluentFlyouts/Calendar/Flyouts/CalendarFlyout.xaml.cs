@@ -1,6 +1,9 @@
+using CommunityToolkit.WinUI.Helpers;
+using CommunityToolkit.WinUI.UI.Helpers;
 using FluentFlyouts.Calendar.Classes;
 using FluentFlyouts.Core.Interfaces;
 using FluentFlyouts.Flyouts;
+using FluentFlyouts.Flyouts.Helpers;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,7 +30,6 @@ using Windows.System;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
-using static System.Net.Mime.MediaTypeNames;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,6 +38,8 @@ namespace FluentFlyouts.Calendar.Flyouts
 {
 	public sealed partial class CalendarFlyout : UserControl, IFlyoutContent
 	{
+		public event EventHandler? ShowFlyoutRequested;
+
 		private DispatcherTimer timer;
 		private TrayIcon? trayIcon;
 		public CalendarFlyout(TrayIcon trayIcon)
@@ -48,12 +52,12 @@ namespace FluentFlyouts.Calendar.Flyouts
 			timer.Tick += Timer_Tick;
 			timer.Start();
 
-			var uiSettings = new UISettings();
-			trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Calendar/Assets/CalendarDark.ico" : "Calendar/Assets/CalendarLight.ico")}");
-			uiSettings.ColorValuesChanged += (sender, e) => {
-				trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Calendar/Assets/CalendarDark.ico" : "Clock/Assets/CalendarLight.ico")}");
+			trayIcon?.UpdateIcon($"{(ThemeHelper.IsSystemThemeDark() ? "Calendar/Assets/CalendarDark.ico" : "Calendar/Assets/CalendarLight.ico")}");
+			TrayIcon.SystemThemeChanged += (sender, IsDark) => {
+				trayIcon?.UpdateIcon($"{(IsDark ? "Calendar/Assets/CalendarDark.ico" : "Calendar/Assets/CalendarLight.ico")}");
 			};
 		}
+
 		public CalendarFlyout()
 		{
 			this.InitializeComponent();
@@ -79,7 +83,7 @@ namespace FluentFlyouts.Calendar.Flyouts
 				: now.ToString("tt", CultureInfo.InvariantCulture); // AM/PM for 12-hour format
 
 			trayIcon?.UpdateTooltip($"{now.ToString("dddd, MMMM d yyyy")}\n{now.ToString((is24HourClock ? "HH:mm" : "h:mm tt"))}");
-			CalendarTime.Content = DateTime.Now.ToString("dddd") + ", " + DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture) + " " + DateTime.Today.Date.ToString("dd") + ", " + DateTime.Now.Year.ToString();
+			CalendarTime.Content = DateTime.Now.ToString("dddd") + ", " + DateTime.Now.ToString("MMMM") + " " + DateTime.Today.Date.ToString("dd") + ", " + DateTime.Now.Year.ToString();
 		}
 
 		private async void CalendarBox_GotFocus(object sender, RoutedEventArgs e)
@@ -338,14 +342,10 @@ namespace FluentFlyouts.Calendar.Flyouts
 			await new MessageDialog("This flyout is still in preview beta and this feature hasnt been implemented.").ShowAsync();
 		}
 
-		private void Calendar_Loaded(object sender, RoutedEventArgs e)
-		{
-			DateTime now = DateTime.Now;
-			Calendar.SetDisplayDate(now);
-		}
-
 		private async void WindowsSettingsButton_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
 
 		public void Dispose() => timer?.Stop();
+
+		private void Calendar_Loaded(object sender, RoutedEventArgs e) => Calendar.SetDisplayDate(DateTime.Now);
 	}
 }

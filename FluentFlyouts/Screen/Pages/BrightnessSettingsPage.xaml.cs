@@ -1,4 +1,5 @@
 using FluentFlyouts.Calendar.Flyouts;
+using FluentFlyouts.Screen.Flyouts;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -17,29 +18,29 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace FluentFlyouts.Calendar.Pages
+namespace FluentFlyouts.Screen.Pages
 {
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public sealed partial class CalendarSettingsPage : Page
+	public sealed partial class BrightnessSettingsPage : Page
 	{
-		public CalendarSettingsPage()
+		public BrightnessSettingsPage()
 		{
 			this.InitializeComponent();
-			ActiveSwitch.IsOn = App.Settings.IsCalendarFlyoutEnabled;
+			ActiveSwitch.IsOn = App.Settings.IsBrightnessFlyoutEnabled;
 		}
 
 		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
-			App.Settings.IsCalendarFlyoutEnabled = ActiveSwitch.IsOn;
-			if (ActiveSwitch.IsOn && !App.flyoutService.HasFlyout(3))
+			App.Settings.IsBrightnessFlyoutEnabled = ActiveSwitch.IsOn;
+			if (ActiveSwitch.IsOn && !App.flyoutService.HasFlyout(4))
 			{
-				App.flyoutService.AddFlyout(3, tray => new CalendarFlyout(tray), true);
+				App.flyoutService.AddFlyout(4, tray => new BrightnessFlyout(tray));
 			}
-			else if (!ActiveSwitch.IsOn && App.flyoutService.HasFlyout(3))
+			else if (!ActiveSwitch.IsOn && App.flyoutService.HasFlyout(4))
 			{
-				App.flyoutService.RemoveFlyout(3);
+				App.flyoutService.RemoveFlyout(4);
 			}
 		}
 	}

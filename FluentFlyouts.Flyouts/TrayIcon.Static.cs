@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TerraFX.Interop.Windows;
 using static TerraFX.Interop.Windows.WM;
 using static TerraFX.Interop.Windows.Windows;
+using FluentFlyouts.Flyouts.Helpers;
 
 namespace FluentFlyouts.Flyouts
 {
@@ -14,6 +15,8 @@ namespace FluentFlyouts.Flyouts
 	{
 		private static Dictionary<uint, TrayIcon> Icons = new();
 		private static HashSet<uint> IconId = new();
+
+		public static event EventHandler<bool> SystemThemeChanged;
 
 		private static void AddIcon(uint Id, TrayIcon Icon)
 		{
@@ -44,6 +47,11 @@ namespace FluentFlyouts.Flyouts
 					Icons.TryGetValue(message, out Icon);
 					Icon?.RightClicked?.Invoke(null, EventArgs.Empty);
 				}
+			}
+			else if (message == WM_SETTINGCHANGE)
+			{
+				if (Marshal.PtrToStringUni(lParam)! == "ImmersiveColorSet")
+					SystemThemeChanged?.Invoke(null, ThemeHelper.IsSystemThemeDark());
 			}
 
 			return DefWindowProc(hWnd, message, wParam, lParam);

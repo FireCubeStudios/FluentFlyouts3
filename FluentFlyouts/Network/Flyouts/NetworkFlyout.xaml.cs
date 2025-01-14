@@ -25,6 +25,8 @@ namespace FluentFlyouts.Network.Flyouts
 {
 	public sealed partial class NetworkFlyout : UserControl, IFlyoutContent
 	{
+		public event EventHandler? ShowFlyoutRequested;
+
 		private TrayIcon trayIcon;
 		private NetworkPresenter networkPresenter = new NetworkPresenter();
 		private bool ConnectAutomatically = true;

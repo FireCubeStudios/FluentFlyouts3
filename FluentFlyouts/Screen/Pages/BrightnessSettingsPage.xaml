@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="FluentFlyouts.Calendar.Pages.ClockSettingsPage"
+    x:Class="FluentFlyouts.Screen.Pages.BrightnessSettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentFlyouts.Calendar.Pages"
+    xmlns:local="using:FluentFlyouts.Screen.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:flyouts="using:FluentFlyouts.Calendar.Flyouts" 
+    xmlns:flyouts="using:FluentFlyouts.Screen.Flyouts" 
     xmlns:settings="using:CubeKit.UI.Controls.Settings" 
     xmlns:icons="using:FluentIcons.WinUI"
     mc:Ignorable="d">
-
     <Grid Padding="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -18,20 +17,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Classic Clock Flyout" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock Text="Screen brightness Flyout" FontSize="24" FontWeight="SemiBold"/>
         </Grid>
         <Grid Grid.Row="1" Background="{ThemeResource MicaBrush}" HorizontalAlignment="Center" RenderTransformOrigin="0.5, 0.5" CornerRadius="8">
-            <Grid.RenderTransform>
-                <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
-            </Grid.RenderTransform>
-            <flyouts:ClockFlyout/>
+            <flyouts:BrightnessFlyout/>
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel>
-                <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 24, 4, 4">Clock personalization</TextBlock>
-                <settings:SettingsBlockControl Title="Clock flyout" Margin="2" Description="Enable the clock flyout in taskbar">
+                <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 24, 4, 4">Screen brightness personalization</TextBlock>
+                <settings:SettingsBlockControl Title="Brightness flyout" Margin="2" Description="Enable the screen brightness flyout in taskbar">
                     <settings:SettingsBlockControl.Icon>
-                        <icons:SymbolIcon Symbol="Clock" FontSize="24"/>
+                        <icons:SymbolIcon Symbol="BrightnessHigh" FontSize="24"/>
                     </settings:SettingsBlockControl.Icon>
                     <ToggleSwitch x:Name="ActiveSwitch" Toggled="ToggleSwitch_Toggled" Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
                 </settings:SettingsBlockControl>

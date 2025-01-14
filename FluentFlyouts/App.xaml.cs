@@ -12,7 +12,11 @@ using FluentFlyouts.Devices.Flyouts;
 using FluentFlyouts.Flyouts;
 using FluentFlyouts.Network.Flyouts;
 using FluentFlyouts.Notifications.Flyouts;
+using FluentFlyouts.Screen.Flyouts;
+using FluentFlyouts.Screen.Services;
+using FluentFlyouts.Screen.ViewModels;
 using FluentFlyouts.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -40,7 +44,8 @@ namespace FluentFlyouts
 		/// </summary>
 		public App()
         {
-            this.InitializeComponent();
+			Services = ConfigureServices();
+			this.InitializeComponent();
 			CheckSingleInstance();
 		}
 
@@ -50,6 +55,32 @@ namespace FluentFlyouts
 			SingleInstanceMutex = new Mutex(true, MutexID, out isNewInstance);
 			if (!isNewInstance)
 				System.Environment.Exit(0);
+		}
+
+		/// <summary>
+		/// Gets the current <see cref="App"/> instance in use
+		/// </summary>
+		public new static App Current => (App)Application.Current;
+
+		/// <summary>
+		/// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+		/// </summary>
+		public IServiceProvider Services { get; }
+
+		/// <summary>
+		/// Setup the Depdency Injection <see cref="IServiceProvider"/> Services.
+		/// </summary>
+		private static IServiceProvider ConfigureServices()
+		{
+			var services = new ServiceCollection();
+
+			//Add Services here
+			services.AddSingleton<ScreenService>();
+
+			// Add ViewModels here
+			services.AddSingleton<ScreenViewModel>();
+
+			return services.BuildServiceProvider();
 		}
 
 		/// <summary>
@@ -69,12 +100,19 @@ namespace FluentFlyouts
 
 			if (Settings.IsClockFlyoutEnabled)
 			{
-				App.flyoutService.AddFlyout(2, tray => new ClockFlyout(tray));
+				App.flyoutService.AddFlyout(2, tray => new ClockFlyout(tray), true);
 			}
 			if (Settings.IsCalendarFlyoutEnabled)
 			{
-				App.flyoutService.AddFlyout(3, tray => new CalendarFlyout(tray));
+				App.flyoutService.AddFlyout(3, tray => new CalendarFlyout(tray), true);
 			}
+			if (Settings.IsBrightnessFlyoutEnabled)
+			{
+				App.flyoutService.AddFlyout(4, tray => new BrightnessFlyout(tray));
+			}
+
+			//App.flyoutService.AddFlyout(1, tray => new BatteryFlyout(tray));
+			App.flyoutService.AddFlyout(4, tray => new BrightnessFlyout(tray));
 		}
 
         public static void OpenSettings()
@@ -89,7 +127,7 @@ namespace FluentFlyouts
 			flyoutService.ClearAllFlyouts();
 			m_window?.Close();
 			CoreApplication.Exit();
-			System.Environment.Exit(0);
+			Environment.Exit(0);
 		}
 
 		public static SettingsService Settings = new();

@@ -15,19 +15,19 @@ using WinUIEx;
 namespace FluentFlyouts.Services
 {
 	/*
-	 * Manages active flyouts
+	 * Manages active flyouts for Fluent Flyouts app
 	 */
 	public class TrayFlyoutService
 	{
 		public Dictionary<int, IFlyoutWindow> Flyouts = new();
 
-		public void AddFlyout(int Id, Func<TrayIcon, IFlyoutContent> flyoutFactory)
+		public void AddFlyout(int Id, Func<TrayIcon, IFlyoutContent> flyoutFactory, bool IsAlignedLeft = false)
 		{
 			if (!HasFlyout(Id))
 			{
 				var tray = new TrayIcon((uint)Id, "", "");
 				var flyoutContent = flyoutFactory(tray);
-				Flyouts.Add(Id, new TrayFlyoutWindow(tray, flyoutContent, GetContextFlyout()));
+				Flyouts.Add(Id, new TrayFlyoutWindow(tray, flyoutContent, GetContextFlyout(), IsAlignedLeft));
 			}
 		}
 

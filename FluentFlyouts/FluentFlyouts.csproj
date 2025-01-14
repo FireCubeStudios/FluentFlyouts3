@@ -36,6 +36,8 @@
 		<None Remove="Network\Controls\NetworkListControl.xaml" />
 		<None Remove="Network\Flyouts\NetworkFlyout.xaml" />
 		<None Remove="Notifications\Flyouts\NotificationFlyout.xaml" />
+		<None Remove="Screen\Flyouts\BrightnessFlyout.xaml" />
+		<None Remove="Screen\Pages\BrightnessSettingsPage.xaml" />
 		<None Remove="Volume\Flyouts\BatteryFlyout.xaml" />
 		<None Remove="Volume\Flyouts\ClockFlyout.xaml" />
 		<None Remove="Volume\Flyouts\VolumeFlyout.xaml" />
@@ -72,6 +74,7 @@
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="PowerStatus" Version="1.0.3" />
+		<PackageReference Include="System.Management" Version="9.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\CubeKit.UI\CubeKit.UI.csproj" />
@@ -83,6 +86,7 @@
 	  <Folder Include="Clock\Assets\" />
 	  <Folder Include="Clock\Flyouts\" />
 	  <Folder Include="Clock\Pages\" />
+	  <Folder Include="Screen\Assets\" />
 	  <Folder Include="Volume\" />
 	</ItemGroup>
 
@@ -141,6 +145,24 @@
 	  <None Update="Clock\Assets\ClockLight.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Screen\Assets\BrightnessDark.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Screen\Assets\BrightnessLight.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Screen\Assets\BrightnessLowDark.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Screen\Assets\BrightnessLowLight.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <Page Update="Screen\Pages\BrightnessSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Screen\Flyouts\BrightnessFlyout.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	  <Page Update="Network\Controls\NetworkListControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>

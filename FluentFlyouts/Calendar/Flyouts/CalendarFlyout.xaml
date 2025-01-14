@@ -9,9 +9,7 @@
     mc:Ignorable="d">
 
     <Grid BorderBrush="{ThemeResource MicaBorderBrush}" CornerRadius="8" BorderThickness="1" Padding="8, 4, 8, 0">
-
         <Grid>
-
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <TextBlock Margin="8, 8, 0 ,0" Typography.NumeralAlignment="2" FontStretch="5" FontWeight="Light" FontSize="36" VerticalAlignment="Bottom" x:Name="Time"/>
@@ -21,9 +19,8 @@
                 <MenuFlyoutSeparator Margin="-12, 0, -12, 0"/>
                 <CalendarView
                     x:Name="Calendar"
-                    Loaded="Calendar_Loaded"
             Background="Transparent"
-    SelectionMode="Single" Width="320"
+    SelectionMode="Single" Width="330" IsTodayHighlighted="True" Loaded="Calendar_Loaded"
                 SelectedDatesChanged="CalendarView_SelectedDatesChanged"
             BorderBrush="Transparent" BorderThickness="0"
     IsGroupLabelVisible="False"
@@ -33,8 +30,8 @@
     Language="en"
     CalendarIdentifier="GregorianCalendar" />
                 <MenuFlyoutSeparator BorderThickness="1" IsEnabled="False" Visibility="Collapsed"/>
-                <Expander Background="Transparent" Visibility="Collapsed"
-                            HorizontalContentAlignment="Stretch"
+                <Expander Background="Transparent"
+                            HorizontalContentAlignment="Stretch" Visibility="Collapsed"
                            IsExpanded="False"
                           
                            HorizontalAlignment="Stretch"

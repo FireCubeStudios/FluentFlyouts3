@@ -1,5 +1,4 @@
 using FluentFlyouts.Core.Interfaces;
-using FluentFlyouts.Flyouts.Helpers;
 using FluentFlyouts.Flyouts.Interfaces;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
@@ -14,10 +13,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TerraFX.Interop.Windows;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics;
 using WinUIEx;
+using System.Runtime.InteropServices;
+using static TerraFX.Interop.Windows.Windows;
+using static TerraFX.Interop.Windows.GWLP;
+using static FluentFlyouts.Flyouts.Win32.Win32;
+using FluentFlyouts.Flyouts.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,22 +34,28 @@ namespace FluentFlyouts.Flyouts
 	/// </summary>
 	public sealed partial class TrayFlyoutWindow : WindowEx, IFlyoutWindow
 	{
+		// Right click flyout menu
+		public MenuFlyout? ContextFlyout;
+
+		// If true then the flyout uses PlacementMode TopEdgeAlignedLeft otherwise it uses Top
+		public bool IsAlignedLeft = false;
+
 		private TrayIcon TrayIcon;
 		private IFlyoutContent FlyoutContent;
-
-		public MenuFlyout? ContextFlyout;
-		public TrayFlyoutWindow(TrayIcon TrayIcon, IFlyoutContent FlyoutContent, MenuFlyout contextFlyout = null)
+		public TrayFlyoutWindow(TrayIcon TrayIcon, IFlyoutContent FlyoutContent, MenuFlyout contextFlyout = null, bool IsAlignedLeft = false)
 		{
 			this.InitializeComponent();
 			this.SetExtendedWindowStyle(ExtendedWindowStyle.Transparent);
 			this.SetWindowOpacity(0);
 			this.ExtendsContentIntoTitleBar = true;
 
+			this.IsAlignedLeft = IsAlignedLeft;
 			this.FlyoutContent = FlyoutContent;
 			this.TrayIcon = TrayIcon;
 			TrayIcon.LeftClicked += (sender, e) => ShowFlyout();
 
 			this.Flyout.Content = FlyoutContent as UIElement;
+			FlyoutContent.ShowFlyoutRequested += (sender, e) => ShowFlyout();
 
 			if (contextFlyout is not null)
 			{
@@ -59,17 +70,19 @@ namespace FluentFlyouts.Flyouts
 
 		public void ShowFlyout()
 		{
-			this.Activate();
-			var cursor = Win32.GetCursorPosition();
-			this.MoveAndResize((double)cursor.X, (double)cursor.Y, 0, 0);
-			FlyoutShowOptions options = new FlyoutShowOptions();
-			options.Placement = FlyoutPlacementMode.TopEdgeAlignedLeft;
-			options.Position = new Point(cursor.X, cursor.Y);
-			Win32.SetForegroundWindow(this.GetWindowHandle());
-
-
-			this.Flyout.ShowAt(this.FlyoutContainer, options);
-			//FlyoutBase.ShowAttachedFlyout(Container);
+			DispatcherQueue.TryEnqueue(() =>
+			{
+				if (this.Flyout.IsOpen || this.Visible) return;
+				this.Activate();
+				var cursor = GetCursorPosition();
+				this.MoveAndResize((double)cursor.X, (double)cursor.Y, 0, 0);
+				FlyoutShowOptions options = new FlyoutShowOptions();
+				options.Placement = IsAlignedLeft ? FlyoutPlacementMode.TopEdgeAlignedLeft : FlyoutPlacementMode.Top;
+				options.Position = new Point(cursor.X, cursor.Y);
+				SetForegroundWindow(this.GetWindowHandle());
+				this.Flyout.ShowAt(this.FlyoutContainer, options);
+				//FlyoutBase.ShowAttachedFlyout(Container);
+			});
 		}
 
 		public void ShowMenuFlyout()
@@ -77,12 +90,12 @@ namespace FluentFlyouts.Flyouts
 			if (ContextFlyout is not null)
 			{
 				this.Activate();
-				this.MoveAndResize((double)Win32.GetCursorPosition().X, (double)Win32.GetCursorPosition().Y, 0, 0);
+				this.MoveAndResize((double)GetCursorPosition().X, (double)GetCursorPosition().Y, 0, 0);
 				FlyoutShowOptions options = new FlyoutShowOptions();
 				options.Position = new Point(0, 0);
 				this.ContextFlyout.ShowAt(this.ContextFlyoutContainer, options);
 				//FlyoutBase.ShowAttachedFlyout(Container);
-				Win32.SetForegroundWindow(this.GetWindowHandle());
+				SetForegroundWindow(this.GetWindowHandle());
 			}
 		}
 

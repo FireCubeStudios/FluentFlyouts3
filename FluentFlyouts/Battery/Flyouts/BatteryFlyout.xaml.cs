@@ -24,6 +24,7 @@ namespace FluentFlyouts.Battery.Flyouts
 {
 	public sealed partial class BatteryFlyout : UserControl, IFlyoutContent
 	{
+		public event EventHandler? ShowFlyoutRequested;
 		private BatteryFlyoutViewModel ViewModel = new();
 		private TrayIcon trayIcon;
 

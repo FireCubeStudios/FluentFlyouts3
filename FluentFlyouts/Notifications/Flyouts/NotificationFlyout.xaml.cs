@@ -27,6 +27,8 @@ namespace FluentFlyouts.Notifications.Flyouts
 {
 	public sealed partial class NotificationFlyout : UserControl, IFlyoutContent
 	{
+		public event EventHandler? ShowFlyoutRequested;
+
 		private UserNotificationListener _listener;
 		private TrayIcon trayIcon;
 		public NotificationFlyout(TrayIcon trayIcon)

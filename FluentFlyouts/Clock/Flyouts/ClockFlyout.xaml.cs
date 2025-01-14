@@ -1,6 +1,7 @@
 using CommunityToolkit.WinUI.UI.Helpers;
 using FluentFlyouts.Core.Interfaces;
 using FluentFlyouts.Flyouts;
+using FluentFlyouts.Flyouts.Helpers;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,6 +28,8 @@ namespace FluentFlyouts.Calendar.Flyouts
 {
 	public sealed partial class ClockFlyout : UserControl, IFlyoutContent
 	{
+		public event EventHandler? ShowFlyoutRequested;
+
 		private DispatcherTimer? timer;
 		private DispatcherTimer? timerDay;
 
@@ -38,10 +41,9 @@ namespace FluentFlyouts.Calendar.Flyouts
 
 			StartTimer();
 
-			var uiSettings = new UISettings();
-			trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Clock/Assets/ClockDark.ico" : "Clock/Assets/ClockLight.ico")}");
-			uiSettings.ColorValuesChanged += (sender, e) =>{
-				trayIcon?.UpdateIcon($"{(uiSettings.GetColorValue(UIColorType.Background) == Colors.Black ? "Clock/Assets/ClockDark.ico" : "Clock/Assets/ClockLight.ico")}");
+			trayIcon?.UpdateIcon($"{(ThemeHelper.IsSystemThemeDark() ? "Clock/Assets/ClockDark.ico" : "Clock/Assets/ClockLight.ico")}");
+			TrayIcon.SystemThemeChanged += (sender, IsDark) => {
+				trayIcon?.UpdateIcon($"{(IsDark ? "Clock/Assets/ClockDark.ico" : "Clock/Assets/ClockLight.ico")}");
 			};
 		}
 
@@ -89,14 +91,9 @@ namespace FluentFlyouts.Calendar.Flyouts
 			trayIcon?.UpdateTooltip($"{now.ToString("dddd, MMMM d yyyy")}\n{now.ToString((is24HourClock ? "HH:mm" : "h:mm tt"))}");
 		}
 
+		private void Calendar_Loaded(object sender, RoutedEventArgs e) => Calendar.SetDisplayDate(DateTime.Now);
+
 		private async void WindowsSettingsButton_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("ms-settings:dateandtime"));
-
-		private void Calendar_Loaded(object sender, RoutedEventArgs e)
-		{
-			DateTime now = DateTime.Now;
-
-			Calendar.SetDisplayDate(now);
-		}
 
 		public void Dispose() => timer?.Stop();
 	}
