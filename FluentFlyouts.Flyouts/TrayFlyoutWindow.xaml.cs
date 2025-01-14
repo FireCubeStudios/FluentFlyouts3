@@ -72,7 +72,7 @@ namespace FluentFlyouts.Flyouts
 		{
 			DispatcherQueue.TryEnqueue(() =>
 			{
-				if (this.Flyout.IsOpen || this.Visible) return;
+				//if (this.Flyout.IsOpen || this.Visible) return;
 				this.Activate();
 				var cursor = GetCursorPosition();
 				this.MoveAndResize((double)cursor.X, (double)cursor.Y, 0, 0);

@@ -78,7 +78,11 @@ namespace FluentFlyouts.Screen.Flyouts
 
 		private string BrightnessToString(double value) => $"{((int)value)}%";
 
-		public void Dispose() => ViewModel.ScreenService.Dispose();
+		public void Dispose()
+		{
+			// fixes singleton bug by commenting out
+			// ViewModel.ScreenService.Dispose();
+		}
 
 		private async void SettingsButton_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("ms-settings:display"));
 	}
