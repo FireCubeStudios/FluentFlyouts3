@@ -23,29 +23,43 @@ namespace FluentFlyouts.Screen.ViewModels
 		{
 			this.ScreenService = ScreenService;
 
-			if (ScreenService.IsBrightnessControlEnabled)
+			try
 			{
-				screenBrightness = ScreenService.GetBrightness();
-				ScreenService.BrightnessChanged += (object? sender, double e) =>
+				if (ScreenService.IsBrightnessControlEnabled)
 				{
-					if (UIThread is not null)
-						UIThread(() => ScreenBrightness = e);
-					else
-						ScreenBrightness = e;
-				};
-				IsBrightnessControlEnabled = true;
+					screenBrightness = ScreenService.GetBrightness();
+					ScreenService.BrightnessChanged += (object? sender, double e) =>
+					{
+						if (UIThread is not null)
+							UIThread(() => ScreenBrightness = e);
+						else
+							ScreenBrightness = e;
+					};
+					IsBrightnessControlEnabled = true;
+				}
 			}
+			catch
+            {
+				IsBrightnessControlEnabled = false;
+            }
 		}
 
 		protected override void OnPropertyChanged(PropertyChangedEventArgs e)
 		{
 			base.OnPropertyChanged(e);
 
-			if (e.PropertyName == "ScreenBrightness")
+			try
 			{
-				ScreenService.SetBrightness(ScreenBrightness);
-				return;
+				if (e.PropertyName == "ScreenBrightness")
+				{
+					ScreenService.SetBrightness(ScreenBrightness);
+					return;
+				}
 			}
+			catch
+            {
+                IsBrightnessControlEnabled = false;
+            }
 		}
 	}
 }

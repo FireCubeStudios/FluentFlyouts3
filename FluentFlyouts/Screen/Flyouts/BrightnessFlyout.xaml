@@ -11,7 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" >
+        <StackPanel Grid.Row="0">
             <StackPanel Orientation="Horizontal" Spacing="4">
                 <Button Click="SettingsButton_Click" Style="{ThemeResource ToolbarButton}" BorderThickness="0" IsTabStop="False">
                     <icons:SymbolIcon x:Name="BrightnessIcon" Symbol="{x:Bind BrightnessToIcon(BrightnessSlider.Value), Mode=OneWay}"/>
@@ -19,6 +19,7 @@
                 <Slider x:Name="BrightnessSlider" Value="{x:Bind ViewModel.ScreenBrightness, Mode=TwoWay}" IsEnabled="{x:Bind ViewModel.IsBrightnessControlEnabled, Mode=OneWay}" Maximum="100" Minimum="0" Width="250" Style="{ThemeResource GlowSlider}" VerticalAlignment="Center" IsTabStop="False" Margin="0, -4, 0, -4"/>
                 <TextBlock Text="{x:Bind BrightnessToString(BrightnessSlider.Value), Mode=OneWay}" VerticalAlignment="Center" Width="32" Margin="12, 0, 4, 2"/>
             </StackPanel>
-        </Grid>
+            <TextBlock x:Name="ErrorText" x:Load="{x:Bind invert(ViewModel.IsBrightnessControlEnabled), Mode=OneWay}" Foreground="Red" Text="Unfortunately controlling brightness is not yet supported on this display. We are working on adding support!" TextAlignment="Center" TextWrapping="WrapWholeWords" MaxWidth="250" HorizontalAlignment="Center" Margin="8"/>
+        </StackPanel>
     </Grid>
 </UserControl>

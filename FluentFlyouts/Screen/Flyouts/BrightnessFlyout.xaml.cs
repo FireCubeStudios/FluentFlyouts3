@@ -63,20 +63,27 @@ namespace FluentFlyouts.Screen.Flyouts
 
 		private void UpdateIcon(double brightness = -1)
 		{
-			try
+			if (brightness == -1)
 			{
-				if (brightness == -1)
+				try
+				{
 					brightness = ViewModel.ScreenService.GetBrightness();
-				var theme = ThemeHelper.IsSystemThemeDark() ? "Dark" : "Light";
-				var level = brightness < 50 ? "Low" : "";
-				trayIcon?.UpdateIcon($"{Location}Brightness{level}{theme}.ico");
+				}
+				catch
+				{
+					brightness = 100; //just to show default icon if WMI unsupported
+				}
 			}
-			catch { }
+			var theme = ThemeHelper.IsSystemThemeDark() ? "Dark" : "Light";
+			var level = brightness < 50 ? "Low" : "";
+			trayIcon?.UpdateIcon($"{Location}Brightness{level}{theme}.ico");
 		}
 
 		private FluentIcons.Common.Symbol BrightnessToIcon(double value) => value < 50 ? FluentIcons.Common.Symbol.BrightnessLow : FluentIcons.Common.Symbol.BrightnessHigh;
 
 		private string BrightnessToString(double value) => $"{((int)value)}%";
+
+		private bool invert(bool b) => !b;
 
 		public void Dispose()
 		{
