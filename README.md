@@ -20,11 +20,19 @@
 
 Introducing **Fluent Flyouts**, a collection of modern flyouts for Windows. Built using WinUI 3 and enhanced using GlowUI, it leverages powerful technologies paired with beautiful design that makes using the app worthwhile.
 
+## 📋 Flyouts
+
+- **Brightness**: Flyout to control screen brightness
+- **Classic clock**: Fluent recreation of Windows 7 Clock flyout with analog clock and calendar
+- **Calendar**: Modern calendar flyout with seconds
+
 ## 📋 Features
 
 - **Design**: Beautiful, modern design inline with the Fluent Design language.
 - **GlowUI**: Stunning design built with GlowUI theming.
-
+- **Startup**: Runs automatically on startup
+- **Performance**: Native WinUI 3 for low resource usage and faster performance
+  
 ## 🙋 Contributing
 
 Want to contribute to this project? Let me know with an [issue](https://github.com/FireCubeStudios/FluentFlyouts/issues) that communicates your intent to create a [pull request](https://github.com/FireCubeStudios/FluentFlyouts/pulls).
