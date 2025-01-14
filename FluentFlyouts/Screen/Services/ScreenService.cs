@@ -72,26 +72,29 @@ namespace FluentFlyouts.Screen.Services
 			}
 		}
 
-		public void SetBrightness(double brightness)
+		public async void SetBrightness(double brightness)
 		{
 			IsInternalChange = true;
-			try
+			await Task.Run(() =>
 			{
-				if (WMICollection is null) return;
-				foreach (ManagementObject obj in WMICollection)
+				try
 				{
-					obj.InvokeMethod("WmiSetBrightness", new object[] { uint.MaxValue, (byte)(brightness) });
+					if (WMICollection is null) return;
+					foreach (ManagementObject obj in WMICollection)
+					{
+						obj.InvokeMethod("WmiSetBrightness", new object[] { uint.MaxValue, (byte)(brightness) });
+						IsInternalChange = false;
+						return;
+					}
 					IsInternalChange = false;
-					return;
+					throw new InvalidOperationException("Unable to set monitor brightness using WMI.");
 				}
-				IsInternalChange = false;
-				throw new InvalidOperationException("Unable to set monitor brightness using WMI.");
-			}
-			catch (Exception ex)
-			{
-				IsInternalChange = false;
-				throw new InvalidOperationException("Error setting brightness through WMI.", ex);
-			}
+				catch (Exception ex)
+				{
+					IsInternalChange = false;
+					throw new InvalidOperationException("Error setting brightness through WMI.", ex);
+				}
+			});
 		}
 
 		public void Dispose()
